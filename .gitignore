@@ -10,3 +10,4 @@ next-env.d.ts
 # workspace declaration and fails with "packages field missing or empty".
 # Build-script approval for the server lives in package.json (pnpm.onlyBuiltDependencies).
 pnpm-workspace.yaml
+node_modules
