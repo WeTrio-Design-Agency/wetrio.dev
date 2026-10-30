@@ -44,7 +44,7 @@ export function Proof() {
   return (
     <section id="brands" className="border-y border-white/[0.08]">
       {/* hairlines from edge to edge, the content in the page column (Kirill, 30.10) */}
-      <div className="wrap flex flex-col gap-7 py-10 md:flex-row md:items-center md:justify-between md:gap-10 md:py-12">
+      <div className="wrap flex flex-col gap-7 py-10 md:flex-row md:items-center md:justify-between md:gap-10 md:py-14">
         <Reveal as="p" className="text-base text-muted-foreground">
           Trusted by leading brands
         </Reveal>

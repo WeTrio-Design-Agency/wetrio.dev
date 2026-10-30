@@ -42,7 +42,8 @@ export function Hero() {
           </Reveal>
         </div>
 
-        <div className="relative mx-6 mb-6 h-[400px] overflow-hidden rounded-[28px] md:mx-10 md:h-[560px] lg:m-0 lg:h-auto lg:min-h-[640px] lg:rounded-r-none">
+        {/* on a desktop: air under the bar, the top-left corner rounded, the bottom-left square (Kirill, 30.10) */}
+        <div className="relative mx-6 mb-6 h-[400px] overflow-hidden rounded-[28px] md:mx-10 md:h-[560px] lg:m-0 lg:mt-8 lg:h-auto lg:min-h-[640px] lg:rounded-none lg:rounded-tl-[28px]">
           <Fluid seed={0.3} />
           <Reveal delay={0.35} className="absolute inset-0">
             <Fit width={1440} span={1.22} x={0.07} y={0.08} narrow={{ span: 1.6, x: 0.07, y: 0.08 }}>

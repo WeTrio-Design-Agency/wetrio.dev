@@ -9,7 +9,7 @@ export function Faq() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="wrap scroll-mt-20 py-20 md:py-32">
+    <section id="faq" className="wrap scroll-mt-20 py-24 md:py-40 lg:py-48">
       {/* the words on the left, the questions on the right level with the heading (Kirill, 30.10) */}
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:items-start lg:gap-16">
         <div>

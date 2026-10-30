@@ -19,7 +19,7 @@ const STACK: { name: string; role: string; icon: GlyphName }[] = [
 
 export function Stack() {
   return (
-    <section id="stack" className="wrap scroll-mt-20 py-20 md:py-32">
+    <section id="stack" className="wrap scroll-mt-20 py-24 md:py-40 lg:py-48">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <Reveal as="h2" className="text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">

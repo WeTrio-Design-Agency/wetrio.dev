@@ -5,7 +5,7 @@ import { ContactLinks } from "../ContactLinks";
 
 export function Contact() {
   return (
-    <section id="contact" className="wrap scroll-mt-20 py-20 md:py-32">
+    <section id="contact" className="wrap scroll-mt-20 py-24 md:py-40 lg:py-48">
       <Reveal className="relative overflow-hidden rounded-[28px]" clip>
         <Fluid seed={6.8} />
         <div className="relative grid grid-cols-1 gap-10 p-6 md:p-12 lg:grid-cols-2 lg:gap-16 lg:p-16">
