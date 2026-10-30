@@ -151,6 +151,14 @@ const GLYPHS: Record<string, React.ReactNode> = {
   plus: <path d="M12 5v14M5 12h14" />,
   chevron: <path d="m6 9 6 6 6-6" />,
   file: <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Zm0 0v6h6" />,
+  arrowUpRight: <path d="M7 17 17 7M8 7h9v9" />,
+  chevronRight: <path d="m9 6 6 6-6 6" />,
+  video: (
+    <>
+      <rect x="3" y="6" width="13" height="12" rx="2" />
+      <path d="m16 10 5-3v10l-5-3" />
+    </>
+  ),
   layers: <path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5m-18 4 9 5 9-5" />,
 };
 

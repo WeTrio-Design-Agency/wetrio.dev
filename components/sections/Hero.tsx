@@ -1,7 +1,7 @@
 import { Fluid } from "../Fluid";
 import { Spark } from "../Icons";
 import { Reveal } from "../Reveal";
-import { HubWindow } from "../mocks/Windows";
+import { HubWindow } from "../mocks/HubWindow";
 
 export function Hero() {
   return (

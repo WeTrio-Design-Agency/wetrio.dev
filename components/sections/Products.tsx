@@ -4,18 +4,19 @@ import { useState } from "react";
 import { Fluid } from "../Fluid";
 import { Spark } from "../Icons";
 import { Reveal } from "../Reveal";
-import { AdminWindow, AnalyzerWindow, Checks, HubWindow, PortalWindow, WetriaWindow } from "../mocks/Windows";
+import { Checks, WetriaWindow } from "../mocks/Windows";
+import { HubWindow } from "../mocks/HubWindow";
+import { AnalyzerWindow, PortalWindow, SiteWindow } from "../mocks/Shots";
 
 const PRODUCTS = [
   {
-    id: "hub",
-    name: "WeTrio Hub",
-    title: "The studio runs on it.",
-    text: "Clients, projects, tasks, timesheets, finance, mail and meetings in one place. Role-based access, a Telegram bot and a daily digest.",
-    checks: ["Replaced ClickUp for the whole team", "Mail, meetings and chat with transcripts", "The client portal reads from the same API"],
-    // the Hub window is wider than the panel: pin it to the top-left corner and let it bleed off the right edge
+    id: "site",
+    name: "wetr.io",
+    title: "The studio site.",
+    text: "Cases, journal, FAQ and SEO edited by the team in its own admin. Leads arrive encrypted, pass Turnstile and reach the Hub.",
+    checks: ["Content edited by the team, not by code", "Encrypted intake with a virus scan", "GA4, Clarity and Meta under consent"],
     scale: "left-[6%] top-[8%] origin-top-left [transform:scale(0.34)] md:[transform:scale(0.5)] xl:[transform:scale(0.56)]",
-    window: <HubWindow />,
+    window: <SiteWindow />,
   },
   {
     id: "wetria",
@@ -23,8 +24,17 @@ const PRODUCTS = [
     title: "AI slide design on your own template.",
     text: "Upload a deck, get it back designed and still editable in PowerPoint, Keynote, Google Slides or Figma. A SaaS with paying customers.",
     checks: ["Stripe subscriptions and promo codes", "Render workers for PPTX and PDF", "Moderation inside the Hub"],
-    scale: "left-[6%] top-[8%] origin-top-left [transform:scale(0.34)] md:[transform:scale(0.5)] xl:[transform:scale(0.56)]",
+    scale: "left-[6%] top-[8%] origin-top-left [transform:scale(0.3)] md:[transform:scale(0.44)] xl:[transform:scale(0.5)]",
     window: <WetriaWindow />,
+  },
+  {
+    id: "hub",
+    name: "WeTrio Hub",
+    title: "The studio runs on it.",
+    text: "Clients, projects, tasks, timesheets, finance, mail and meetings in one place. Role-based access, a Telegram bot and a daily digest.",
+    checks: ["Replaced ClickUp for the whole team", "Mail, meetings and chat with transcripts", "The client portal reads from the same API"],
+    scale: "left-[6%] top-[8%] origin-top-left [transform:scale(0.34)] md:[transform:scale(0.5)] xl:[transform:scale(0.56)]",
+    window: <HubWindow />,
   },
   {
     id: "portal",
@@ -43,15 +53,6 @@ const PRODUCTS = [
     checks: ["PPTX and PDF rendering with font substitution", "A render service for websites", "Limits per address and per network"],
     scale: "left-[6%] top-[8%] origin-top-left [transform:scale(0.34)] md:[transform:scale(0.5)] xl:[transform:scale(0.56)]",
     window: <AnalyzerWindow />,
-  },
-  {
-    id: "admin",
-    name: "wetr.io and its admin",
-    title: "The studio site and the CMS behind it.",
-    text: "Cases, journal, FAQ and SEO edited by the team without a developer. Leads arrive encrypted, pass Turnstile and land on the Hub board.",
-    checks: ["Content edited by the team, not by code", "Encrypted intake with a virus scan", "GA4, Clarity and Meta under consent"],
-    scale: "left-[6%] top-[8%] origin-top-left [transform:scale(0.34)] md:[transform:scale(0.5)] xl:[transform:scale(0.56)]",
-    window: <AdminWindow />,
   },
 ];
 
