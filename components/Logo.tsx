@@ -31,7 +31,7 @@ export function DevLabWordmark({ className }: LogoProps) {
 /* The lock-up from Figma: the wordmark white, "Dev Lab" in the studio's blue, right-aligned beneath it. */
 export function Logo({ className = "" }: LogoProps) {
   return (
-    <span className={`flex flex-col items-end gap-[3px] ${className}`}>
+    <span className={`inline-flex flex-col items-end gap-[3px] ${className}`}>
       <WeTrioWordmark className="h-[18px] w-auto text-foreground" />
       <DevLabWordmark className="h-[11px] w-auto text-accent" />
     </span>

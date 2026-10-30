@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
+import { trackEvent } from "@/lib/analytics/track";
+import { DEMOS_URL } from "@/lib/site";
 
 const LINKS = [
   { href: "#products", label: "Products" },
@@ -35,7 +37,7 @@ export function Header() {
         scrolled || open ? "bg-background/80 backdrop-blur-xl" : "bg-transparent"
       }`}
     >
-      <div className="flex h-16 items-center px-6 md:px-10">
+      <div className="wrap flex h-20 items-center">
         <a href="#top" className="z-10 flex items-center" aria-label="WeTrio Dev Lab, home">
           <Logo />
         </a>
@@ -54,14 +56,14 @@ export function Header() {
 
         <div className="ml-auto hidden items-center gap-2 lg:flex">
           <a
-            href="https://demo.wetrio.dev"
+            href={DEMOS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
           >
             Demos
           </a>
-          <a href="#contact" className="btn btn-primary">
+          <a href="#contact" onClick={() => trackEvent("cta_click", { place: "nav" })} className="btn btn-primary">
             Start a project
           </a>
         </div>
@@ -94,8 +96,8 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="h-[calc(100dvh-4rem)] overflow-y-auto bg-background/95 backdrop-blur-xl lg:hidden">
-          <div className="flex flex-col gap-1 px-6 py-4">
+        <div className="h-[calc(100dvh-5rem)] overflow-y-auto bg-background/95 backdrop-blur-xl lg:hidden">
+          <div className="wrap flex flex-col gap-1 py-4">
             {LINKS.map((link) => (
               <a
                 key={link.href}
@@ -107,7 +109,7 @@ export function Header() {
               </a>
             ))}
             <a
-              href="https://demo.wetrio.dev"
+              href={DEMOS_URL}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
@@ -115,7 +117,14 @@ export function Header() {
             >
               Demos
             </a>
-            <a href="#contact" onClick={() => setOpen(false)} className="btn btn-primary mt-3">
+            <a
+              href="#contact"
+              onClick={() => {
+                setOpen(false);
+                trackEvent("cta_click", { place: "nav_mobile" });
+              }}
+              className="btn btn-primary mt-3"
+            >
               Start a project
             </a>
           </div>

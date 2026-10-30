@@ -81,7 +81,7 @@ const PROJECTS: Project[] = [
 
 export function Projects() {
   return (
-    <section id="projects" className="wrap scroll-mt-16 py-20 md:py-32">
+    <section id="projects" className="wrap scroll-mt-20 py-20 md:py-32">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <Reveal>

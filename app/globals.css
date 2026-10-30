@@ -50,11 +50,9 @@ body {
   color: var(--accent-foreground);
 }
 
-/* The page column: wide, with the same gutter as the bar. */
+/* The page column: the full width, with the same gutter as the bar (Kirill, 30.10: sections as wide as the bar). */
 .wrap {
-  margin-inline: auto;
   width: 100%;
-  max-width: 1480px;
   padding-inline: 1.5rem;
 }
 @media (min-width: 768px) {

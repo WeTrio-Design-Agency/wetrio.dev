@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics/track";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 const SERVICES = [
   { id: "saas", label: "SaaS platform" },
@@ -11,8 +13,6 @@ const SERVICES = [
   { id: "mvp", label: "MVP or prototype" },
   { id: "other", label: "Something else" },
 ];
-
-const CONTACT_EMAIL = "start@wetr.io";
 
 const field =
   "w-full rounded-lg bg-white/[0.06] px-4 py-2.5 text-base text-foreground placeholder:text-white/40 outline-none ring-1 ring-white/15 transition-shadow focus:ring-2 focus:ring-accent";
@@ -36,6 +36,7 @@ export function ContactForm() {
     if (next.name || next.email || next.description) return;
 
     const serviceLabel = SERVICES.find((s) => s.id === service)?.label ?? "Not specified";
+    trackEvent("enquiry_submitted", { service: service || "not_specified" });
     const subject = `New project enquiry: ${name}`;
     const body = [`Name: ${name}`, `Email: ${email}`, `Service: ${serviceLabel}`, "", "Project:", description].join("\n");
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

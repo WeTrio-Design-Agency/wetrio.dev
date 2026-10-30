@@ -9,21 +9,19 @@ import { Products } from "@/components/sections/Products";
 import { Projects } from "@/components/sections/Projects";
 import { Proof } from "@/components/sections/Proof";
 import { Stack } from "@/components/sections/Stack";
+import { FAQ } from "@/lib/faq";
+import { faqJsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
-const ORG = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "WeTrio Development Lab",
-  url: "https://wetrio.dev",
-  parentOrganization: { "@type": "Organization", name: "WeTrio", url: "https://wetr.io" },
-  email: "start@wetr.io",
-  sameAs: ["https://wetr.io", "https://t.me/wetr_io"],
-};
+function JsonLd({ data }: { data: object }) {
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
+}
 
 export default function Home() {
   return (
     <main className="grain">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG) }} />
+      <JsonLd data={organizationJsonLd()} />
+      <JsonLd data={websiteJsonLd()} />
+      <JsonLd data={faqJsonLd(FAQ)} />
       <Header />
       <Hero />
       <Proof />

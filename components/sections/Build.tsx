@@ -92,7 +92,7 @@ export function Build() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="build" className="wrap scroll-mt-16 py-20 md:py-32">
+    <section id="build" className="wrap scroll-mt-20 py-20 md:py-32">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <Reveal>

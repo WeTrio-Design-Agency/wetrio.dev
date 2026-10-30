@@ -37,7 +37,7 @@ const PRINCIPLES = [
 
 export function Process() {
   return (
-    <section id="process" className="wrap scroll-mt-16 py-20 md:py-32">
+    <section id="process" className="wrap scroll-mt-20 py-20 md:py-32">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <Reveal>

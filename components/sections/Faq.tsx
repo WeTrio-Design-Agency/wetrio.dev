@@ -4,39 +4,14 @@ import { useState } from "react";
 import { Fluid } from "../Fluid";
 import { Minus, Plus, Spark } from "../Icons";
 import { Reveal } from "../Reveal";
-
-const FAQ = [
-  {
-    q: "How soon do we see something working?",
-    a: "Within the first sprint. A clickable prototype lives on its own URL, usually two to four weeks after the brief.",
-  },
-  {
-    q: "What does it cost to start?",
-    a: "We scope a fixed-price first sprint after one call. The estimate lists what you get and when you can click it.",
-  },
-  {
-    q: "Who owns the code?",
-    a: "You do. The repository, the infrastructure and the accounts are yours from day one.",
-  },
-  {
-    q: "Do you design as well?",
-    a: "Yes. The Lab is run by WeTrio, a B2B design studio. Interface and architecture are designed together.",
-  },
-  {
-    q: "What happens after launch?",
-    a: "We stay on: monitoring, fixes, iterations and new features under a monthly agreement or per task.",
-  },
-  {
-    q: "Which stack do you use?",
-    a: "Next.js, TypeScript, Supabase or PostgreSQL, Stripe and Cloudflare. The same stack runs our own products.",
-  },
-];
+import { ContactLinks } from "../ContactLinks";
+import { FAQ } from "@/lib/faq";
 
 export function Faq() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section id="faq" className="wrap scroll-mt-16 py-20 md:py-32">
+    <section id="faq" className="wrap scroll-mt-20 py-20 md:py-32">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <Reveal>
@@ -99,17 +74,7 @@ export function Faq() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 Ask about scope, timelines or the stack. We answer in person, in the channel you prefer.
               </p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                <a href="https://t.me/wetr_io" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">
-                  Telegram
-                </a>
-                <a href="https://wa.me/48506782768" target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-sm">
-                  WhatsApp
-                </a>
-                <a href="mailto:start@wetr.io" className="btn btn-secondary btn-sm">
-                  start@wetr.io
-                </a>
-              </div>
+              <ContactLinks order={["telegram", "whatsapp", "email"]} place="faq" className="mt-5" />
             </div>
           </div>
         </Reveal>
