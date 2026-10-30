@@ -18,7 +18,10 @@ function JsonLd({ data }: { data: object }) {
 
 export default function Home() {
   return (
-    <main className="grain">
+    <main id="main" className="grain">
+      <a href="#products" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:rounded-lg focus:bg-card focus:px-4 focus:py-2 focus:text-sm">
+        Skip to content
+      </a>
       <JsonLd data={organizationJsonLd()} />
       <JsonLd data={websiteJsonLd()} />
       <JsonLd data={faqJsonLd(FAQ)} />

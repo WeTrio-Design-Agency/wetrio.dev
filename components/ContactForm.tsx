@@ -34,7 +34,11 @@ export function ContactForm() {
       description: !description.trim(),
     };
     setErrors(next);
-    if (next.name || next.email || next.description) return;
+    const first = (["name", "email", "description"] as const).find((k) => next[k]);
+    if (first) {
+      document.getElementById(`contact-${first}`)?.focus();
+      return;
+    }
 
     const serviceLabel = SERVICES.find((s) => s.id === service)?.label ?? "Not specified";
     trackEvent("enquiry_submitted", { service: service || "not_specified" });

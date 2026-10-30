@@ -1,5 +1,4 @@
 import { Fluid } from "../Fluid";
-import { Spark } from "../Icons";
 import { Reveal } from "../Reveal";
 import { Fit } from "../mocks/Fit";
 import { HubWindow } from "../mocks/HubWindow";
@@ -15,13 +14,7 @@ export function Hero() {
       <div className="grid min-h-[calc(100svh-5rem)] grid-cols-1 lg:grid-cols-[minmax(0,45%)_minmax(0,55%)]">
         {/* the words */}
         <div className="flex flex-col justify-center px-6 pb-12 pt-16 md:px-10 lg:py-24 lg:pl-10 lg:pr-16">
-          <Reveal>
-            <span className="tag">
-              <Spark className="h-3 w-3 text-foreground" />
-              Design-led engineering by WeTrio
-            </span>
-          </Reveal>
-          <Reveal as="h1" delay={0.1} className="mt-8 text-[2.75rem] font-medium leading-[1.02] tracking-[-0.03em] md:text-6xl xl:text-[5.25rem]">
+          <Reveal as="h1" className="text-[2.75rem] font-medium leading-[1.02] tracking-[-0.03em] md:text-6xl lg:text-[clamp(3rem,5.4vw,5.25rem)]">
             SaaS and web
             <br />
             products,
@@ -29,8 +22,7 @@ export function Hero() {
             <span className="h-dim">built to ship.</span>
           </Reveal>
           <Reveal as="p" delay={0.2} className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Architecture, design, engineering and launch by one accountable team. Every project runs on a real URL
-            from the first weeks.
+            Architecture, design, engineering and launch by one accountable team.
           </Reveal>
           <Reveal delay={0.3} className="mt-10 flex flex-wrap items-center gap-3">
             <a href="#contact" className="btn btn-primary">

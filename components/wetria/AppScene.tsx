@@ -147,15 +147,22 @@ export function AppScene({ onPhase }: { onPhase?: (p: ScenePhase) => void }) {
       raf = 0
       paused = performance.now()
     }
+    // The Lab shows the window scaled and cut by its panel's bottom edge, so the part on screen can be small: any
+    // visible slice runs the clock, and the first check is made here rather than waited for from the observer.
     const io = new IntersectionObserver(
       ([e]) => {
         visible = e.isIntersecting
         if (visible) run()
         else stop()
       },
-      { threshold: 0.3 },
+      { threshold: 0.02 },
     )
     io.observe(el)
+    const r0 = el.getBoundingClientRect()
+    if (r0.bottom > 0 && r0.top < window.innerHeight && r0.right > 0 && r0.left < window.innerWidth) {
+      visible = true
+      run()
+    }
     const onVis = () => (document.hidden ? stop() : run())
     document.addEventListener("visibilitychange", onVis)
     return () => {

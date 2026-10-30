@@ -10,7 +10,7 @@ export function Contact() {
         <Fluid seed={6.8} />
         <div className="relative grid grid-cols-1 gap-10 p-6 md:p-12 lg:grid-cols-2 lg:gap-16 lg:p-16">
           <div className="flex flex-col">
-            <h2 className="text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
+            <h2 className="text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl lg:text-[clamp(2.75rem,4.2vw,3.75rem)]">
               Let&apos;s build the
               <br />
               first version.

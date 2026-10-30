@@ -1,5 +1,4 @@
 import { Logo } from "../Logo";
-import { ContactLinks } from "../ContactLinks";
 import { CookieSettingsLink } from "../CookieBanner";
 
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
@@ -34,22 +33,30 @@ const external = (href: string) => (href.startsWith("http") ? { target: "_blank"
 export function Footer() {
   return (
     <footer>
-      <div className="wrap grid grid-cols-1 gap-12 py-16 md:grid-cols-[1.2fr_2fr] md:py-20">
+      <div className="wrap flex flex-col gap-12 py-16 md:flex-row md:items-start md:justify-between md:py-20">
         <div>
           <Logo />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
             Software products by WeTrio, a B2B design studio. Architecture, design, engineering and launch by one team.
           </p>
-          <ContactLinks order={["email", "telegram"]} place="footer" className="mt-6" />
+          {/* the hero's two buttons (Kirill, 30.10) */}
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a href="#contact" className="btn btn-primary">
+              Start a project
+            </a>
+            <a href="#products" className="btn btn-secondary">
+              See the products
+            </a>
+          </div>
         </div>
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 md:gap-x-16 lg:gap-x-20">
           {COLUMNS.map((c) => (
             <div key={c.title}>
               <p className="text-sm font-semibold text-foreground">{c.title}</p>
               <ul className="mt-4 space-y-2.5">
                 {c.links.map((l) => (
                   <li key={l.label}>
-                    <a href={l.href} {...external(l.href)} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                    <a href={l.href} {...external(l.href)} className="inline-block py-0.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
                       {l.label}
                     </a>
                   </li>

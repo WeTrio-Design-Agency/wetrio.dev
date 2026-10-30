@@ -25,13 +25,18 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
     };
   }, [open]);
 
   return (
     <nav
+      aria-label="Main"
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         scrolled || open ? "bg-background/80 backdrop-blur-xl" : "bg-transparent"
       }`}
@@ -53,7 +58,7 @@ export function Header() {
           ))}
         </div>
 
-        <a href="#contact" onClick={() => trackEvent("cta_click", { place: "nav" })} className="btn btn-primary ml-auto hidden lg:inline-flex">
+        <a href="#contact" onClick={() => trackEvent("cta_click", { place: "nav" })} className="btn btn-primary ml-auto mr-3 lg:mr-0">
           Start a project
         </a>
 
@@ -62,7 +67,7 @@ export function Header() {
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle navigation menu"
           aria-expanded={open}
-          className="ml-auto flex h-10 w-10 items-center justify-center rounded-md bg-white/5 lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-md bg-white/5 lg:hidden"
         >
           <span className="relative block h-4 w-5">
             <span
@@ -97,16 +102,6 @@ export function Header() {
                 {link.label}
               </a>
             ))}
-            <a
-              href="#contact"
-              onClick={() => {
-                setOpen(false);
-                trackEvent("cta_click", { place: "nav_mobile" });
-              }}
-              className="btn btn-primary mt-3"
-            >
-              Start a project
-            </a>
           </div>
         </div>
       )}

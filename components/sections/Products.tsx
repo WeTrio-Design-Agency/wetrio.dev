@@ -32,8 +32,8 @@ const PRODUCTS: { id: string; name: string; title: string; text: string; checks:
     id: "site",
     name: "Website and CMS",
     title: "wetr.io: the studio's site and the admin behind it.",
-    text: "The team edits cases, the journal, FAQ and SEO without a developer. Every enquiry is encrypted, checked for bots and viruses, and lands on the Hub's lead board within seconds.",
-    checks: ["A CMS the team runs without a developer", "Encrypted intake with bot and virus checks", "GA4, Clarity and Meta Pixel under cookie consent"],
+    text: "The team edits cases, the journal, FAQ and SEO without a developer. Every enquiry is encrypted.",
+    checks: ["A CMS the team runs without a developer", "Encrypted enquiry intake", "GA4, Clarity and Meta Pixel under cookie consent"],
     width: 1440,
     window: <SiteWindow />,
   },
@@ -47,7 +47,7 @@ export function Products() {
     <section id="products" className="wrap scroll-mt-20 py-24 md:py-40 lg:py-48">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
-          <Reveal as="h2" className="text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
+          <Reveal as="h2" className="text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl lg:text-[clamp(2.75rem,4.2vw,3.75rem)]">
             Products we build
             <br />
             <span className="h-dim">and keep running.</span>
