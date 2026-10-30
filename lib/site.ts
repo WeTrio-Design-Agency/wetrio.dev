@@ -5,7 +5,7 @@ export const SITE_NAME = "WeTrio Development Lab";
 export const SHORT_NAME = "WeTrio Dev Lab";
 export const TITLE = "WeTrio Development Lab: SaaS and web products, built to ship";
 export const DESCRIPTION =
-  "A product development lab by WeTrio, a B2B design studio. Architecture, design, engineering and launch by one team, from the first sprint to production.";
+  "A design studio's dev lab. Architecture, design, engineering and launch by one team: interfaces people want to use, code that holds in production.";
 export const OG_IMAGE = "/og.jpg";
 
 export const STUDIO_ORIGIN = "https://wetr.io";

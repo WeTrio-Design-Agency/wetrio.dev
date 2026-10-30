@@ -22,7 +22,8 @@ export function Hero() {
             <span className="h-dim">built to ship.</span>
           </Reveal>
           <Reveal as="p" delay={0.2} className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Architecture, design, engineering and launch by one accountable team.
+            Architecture, design, engineering and launch by one team. A design studio&apos;s dev lab: interfaces people
+            want to use, code that holds in production.
           </Reveal>
           <Reveal delay={0.3} className="mt-10 flex flex-wrap items-center gap-3">
             <a href="#contact" className="btn btn-primary">
