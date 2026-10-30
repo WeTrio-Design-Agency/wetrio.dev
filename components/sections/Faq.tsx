@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Fluid } from "../Fluid";
 import { Minus, Plus, Spark } from "../Icons";
 import { Reveal } from "../Reveal";
-import { ContactLinks } from "../ContactLinks";
 import { FAQ } from "@/lib/faq";
 
 export function Faq() {
@@ -12,7 +10,8 @@ export function Faq() {
 
   return (
     <section id="faq" className="wrap scroll-mt-20 py-20 md:py-32">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+      {/* the words on the left, the questions on the right level with the heading (Kirill, 30.10) */}
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:items-start lg:gap-16">
         <div>
           <Reveal>
             <span className="tag">
@@ -25,14 +24,13 @@ export function Faq() {
             <br />
             <span className="h-dim">answered.</span>
           </Reveal>
+          <Reveal as="p" delay={0.15} className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
+            Everything people ask before the first call. Not here? Write to us, a person answers.
+          </Reveal>
         </div>
-        <Reveal as="p" delay={0.15} className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-          Everything people ask before the first call. Not here? Write to us, a person answers.
-        </Reveal>
-      </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
-        <Reveal className="surface rounded-card">
+        {/* 28px tag + 24px gap: the first question lines up with the top of the heading */}
+        <Reveal delay={0.1} className="surface rounded-card lg:mt-[52px]">
           {FAQ.map((f, i) => {
             const isOpen = i === open;
             return (
@@ -64,19 +62,6 @@ export function Faq() {
               </div>
             );
           })}
-        </Reveal>
-
-        <Reveal delay={0.1} className="relative min-h-[360px] overflow-hidden rounded-card">
-          <Fluid seed={4.4} />
-          <div className="absolute inset-0 flex items-center justify-center p-6 md:p-10">
-            <div className="glass w-full max-w-sm rounded-card p-6">
-              <p className="text-lg font-medium">Still have questions?</p>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Ask about scope, timelines or the stack. We answer in person, in the channel you prefer.
-              </p>
-              <ContactLinks order={["telegram", "whatsapp", "email"]} place="faq" className="mt-5" />
-            </div>
-          </div>
         </Reveal>
       </div>
     </section>

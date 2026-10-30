@@ -3,7 +3,7 @@ import { Reveal } from "../Reveal";
 /**
  * «Trusted by leading brands» with the five marks of wetr.io, in the site's own proportions (`HeroTrustBrands.tsx`,
  * measured on the live page: a 40px row, each mark 10% shorter than the row and capped at 160px × its scale, Nestlé a
- * size down, Louis Vuitton a size up, 56px between them). Here the sentence sits on the left and the row on the right
+ * size down, Louis Vuitton a size up, 56px between them on the site, more here so the row fills its half). Here the sentence sits on the left and the row on the right
  * (Kirill, 30.10); on a phone the sentence on top, then three marks across and the two widest underneath, as the site
  * lays them out. The SVGs are the site's (public/logos), painted through a mask in the muted grey on the dark ground.
  */
@@ -26,7 +26,7 @@ function Mark({ b, mobile }: { b: (typeof BRANDS)[number]; mobile?: boolean }) {
     <span
       role="img"
       aria-label={b.name}
-      className="block bg-muted-foreground opacity-70"
+      className="block bg-muted-foreground opacity-85"
       style={{
         WebkitMask: mask,
         mask,
@@ -41,14 +41,15 @@ export function Proof() {
   const top = BRANDS.filter((b) => TOP.includes(b.name));
   const bottom = BRANDS.filter((b) => !TOP.includes(b.name));
   return (
-    <section id="brands" className="wrap py-12 md:py-16">
-      <div className="flex flex-col gap-7 md:flex-row md:items-center md:justify-between md:gap-10">
+    <section id="brands" className="wrap">
+      {/* a hairline above and below, so the strip reads as a band of its own (Kirill, 30.10) */}
+      <div className="flex flex-col gap-7 border-y border-white/[0.08] py-10 md:flex-row md:items-center md:justify-between md:gap-10 md:py-12">
         <Reveal as="p" className="text-base text-muted-foreground">
           Trusted by leading brands
         </Reveal>
 
         {/* a desktop: one row, as on the site */}
-        <div className="hidden items-center gap-x-14 md:flex">
+        <div className="hidden items-center gap-x-16 md:flex lg:gap-x-24 xl:gap-x-28">
           {BRANDS.map((b, i) => (
             <Reveal key={b.name} delay={0.06 * i} className="flex h-10 items-center justify-center">
               <Mark b={b} />
