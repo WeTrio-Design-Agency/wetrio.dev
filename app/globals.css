@@ -247,7 +247,7 @@ body {
   animation: draw 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
 }
 
-/* wetr.io's home page scrolls through its window and back; the Analyzer shows the filled page, then its result. */
+/* wetr.io's home page scrolls through its window and back. */
 @keyframes site-scroll {
   0%,
   6% {
@@ -262,26 +262,9 @@ body {
   animation: site-scroll 34s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
   will-change: transform;
 }
-@keyframes analyzer-swap {
-  0%,
-  42% {
-    opacity: 0;
-  }
-  50%,
-  92% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-.analyzer-swap {
-  animation: analyzer-swap 14s ease-in-out infinite;
-}
 
 @media (prefers-reduced-motion: reduce) {
-  .site-scroll,
-  .analyzer-swap {
+  .site-scroll {
     animation: none;
   }
   .reveal,

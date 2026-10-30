@@ -1,37 +1,33 @@
-/* eslint-disable @next/next/no-img-element -- screenshots of our own products, shown as they are */
+"use client";
+
+/* eslint-disable @next/next/no-img-element -- a screenshot of our own site, shown as it is */
+
+import { useEffect, useRef, useState } from "react";
 
 /**
- * Windows that show a product as it is, from a screenshot of the live thing (Kirill, 30.10: «в точности как они
- * сделаны»): wetr.io scrolling through its home page, the client portal's overview, the Analyzer with its result.
- * The pictures live in public/products and are refreshed with tools/shots.cjs.
+ * wetr.io as it is: a full-height screenshot of the live home page (public/products/site-home.jpg, refreshed with
+ * tools/shots.cjs) scrolling through a 1440 x 960 window. The scroll starts when the window comes into view or the
+ * product is opened, not when the page loads (Kirill, 30.10), and stops off screen.
  */
-
-const FRAME = "relative overflow-hidden rounded-xl shadow-[0_40px_90px_rgba(0,0,0,0.65)] ring-1 ring-white/10";
-
-/** wetr.io's home page, 1440 wide, scrolled top to bottom and back over half a minute. */
 export function SiteWindow() {
-  return (
-    <div className={`${FRAME} h-[960px] w-[1440px] bg-white`} aria-hidden="true">
-      <img src="/products/site-home.jpg" alt="" width={1440} height={8351} className="site-scroll block w-full" />
-    </div>
-  );
-}
+  const ref = useRef<HTMLDivElement>(null);
+  const [playing, setPlaying] = useState(false);
 
-/** The client portal's overview, in the light theme. */
-export function PortalWindow() {
-  return (
-    <div className={`${FRAME} h-[960px] w-[1440px] bg-[#f8fafc]`} aria-hidden="true">
-      <img src="/products/portal-overview.jpg" alt="" width={1440} height={960} className="block w-full" />
-    </div>
-  );
-}
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setPlaying(e.isIntersecting), { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
-/** Analyzer on wetr.io: the page with a deck attached, then the result, in turn. */
-export function AnalyzerWindow() {
   return (
-    <div className={`${FRAME} h-[900px] w-[1440px] bg-white`} aria-hidden="true">
-      <img src="/products/analyzer-filled.jpg" alt="" width={1440} height={900} className="absolute inset-0 block w-full" />
-      <img src="/products/analyzer-result.jpg" alt="" width={1440} height={900} className="analyzer-swap absolute inset-0 block w-full" />
+    <div
+      ref={ref}
+      className="relative h-[960px] w-[1440px] overflow-hidden rounded-xl bg-white shadow-[0_40px_90px_rgba(0,0,0,0.65)] ring-1 ring-white/10"
+      aria-hidden="true"
+    >
+      <img src="/products/site-home.jpg" alt="" width={1440} height={8307} className={`block w-full ${playing ? "site-scroll" : ""}`} />
     </div>
   );
 }

@@ -5,17 +5,18 @@ import { Fluid } from "../Fluid";
 import { Spark } from "../Icons";
 import { Reveal } from "../Reveal";
 import { Checks, WetriaWindow } from "../mocks/Windows";
+import { Fit } from "../mocks/Fit";
 import { HubWindow } from "../mocks/HubWindow";
-import { AnalyzerWindow, PortalWindow, SiteWindow } from "../mocks/Shots";
+import { SiteWindow } from "../mocks/Shots";
 
-const PRODUCTS = [
+const PRODUCTS: { id: string; name: string; title: string; text: string; checks: string[]; width: number; margin?: number; window: React.ReactNode }[] = [
   {
     id: "site",
     name: "wetr.io",
     title: "The studio site.",
     text: "Cases, journal, FAQ and SEO edited by the team in its own admin. Leads arrive encrypted, pass Turnstile and reach the Hub.",
     checks: ["Content edited by the team, not by code", "Encrypted intake with a virus scan", "GA4, Clarity and Meta under consent"],
-    scale: "left-[6%] top-[8%] origin-top-left [transform:scale(0.34)] md:[transform:scale(0.5)] xl:[transform:scale(0.56)]",
+    width: 1440,
     window: <SiteWindow />,
   },
   {
@@ -24,7 +25,8 @@ const PRODUCTS = [
     title: "AI slide design on your own template.",
     text: "Upload a deck, get it back designed and still editable in PowerPoint, Keynote, Google Slides or Figma. A SaaS with paying customers.",
     checks: ["Stripe subscriptions and promo codes", "Render workers for PPTX and PDF", "Moderation inside the Hub"],
-    scale: "left-[6%] top-[8%] origin-top-left [transform:scale(0.3)] md:[transform:scale(0.44)] xl:[transform:scale(0.5)]",
+    width: 1700,
+    margin: 0.01, // 1700 wide and squatter than the others: room on the sides would leave it short of the panel's bottom
     window: <WetriaWindow />,
   },
   {
@@ -33,26 +35,8 @@ const PRODUCTS = [
     title: "The studio runs on it.",
     text: "Clients, projects, tasks, timesheets, finance, mail and meetings in one place. Role-based access, a Telegram bot and a daily digest.",
     checks: ["Replaced ClickUp for the whole team", "Mail, meetings and chat with transcripts", "The client portal reads from the same API"],
-    scale: "left-[6%] top-[8%] origin-top-left [transform:scale(0.34)] md:[transform:scale(0.5)] xl:[transform:scale(0.56)]",
+    width: 1440,
     window: <HubWindow />,
-  },
-  {
-    id: "portal",
-    name: "Client portal",
-    title: "What a client sees.",
-    text: "Projects, hours left in the package, files and invoices. The data comes from the Hub, nothing is entered twice.",
-    checks: ["Reads the Hub API, no second database", "Files and invoices per project", "A demo mode for prospects"],
-    scale: "left-[6%] top-[8%] origin-top-left [transform:scale(0.34)] md:[transform:scale(0.5)] xl:[transform:scale(0.56)]",
-    window: <PortalWindow />,
-  },
-  {
-    id: "analyzer",
-    name: "Analyzer",
-    title: "A free design check that brings leads.",
-    text: "Upload a deck or paste a site address and get a scored report in minutes. Rendering workers, rate limits and abuse control included.",
-    checks: ["PPTX and PDF rendering with font substitution", "A render service for websites", "Limits per address and per network"],
-    scale: "left-[6%] top-[8%] origin-top-left [transform:scale(0.34)] md:[transform:scale(0.5)] xl:[transform:scale(0.56)]",
-    window: <AnalyzerWindow />,
   },
 ];
 
@@ -77,8 +61,8 @@ export function Products() {
           </Reveal>
         </div>
         <Reveal as="p" delay={0.15} className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-          Our own operations platform, a SaaS with paying customers, a client portal and the studio site. Same team, same
-          stack we offer you.
+          Our own operations platform, a SaaS with paying customers and the studio site. Same team, same stack we offer
+          you.
         </Reveal>
       </div>
 
@@ -117,14 +101,12 @@ export function Products() {
           })}
         </Reveal>
 
-        <Reveal delay={0.1} className="relative min-h-[420px] overflow-hidden rounded-card md:min-h-[560px]">
+        <Reveal delay={0.1} className="relative h-[260px] overflow-hidden rounded-card md:h-[440px]">
           <Fluid seed={2.1} />
-          {/* the outer div carries position and scale; the fade runs on the inner one, so the two transforms do not fight */}
-          <div className={`absolute ${current.scale}`}>
-            <div key={current.id} className="swap-in">
-              {current.window}
-            </div>
-          </div>
+          {/* Fit carries position and scale; the fade runs on the inner div, so the two transforms do not fight */}
+          <Fit key={current.id} width={current.width} margin={current.margin ?? 0.04} top="7%">
+            <div className="swap-in">{current.window}</div>
+          </Fit>
         </Reveal>
       </div>
     </section>
