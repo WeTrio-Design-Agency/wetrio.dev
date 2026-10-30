@@ -9,20 +9,12 @@ import { Fit } from "../mocks/Fit";
 import { HubWindow } from "../mocks/HubWindow";
 import { SiteWindow } from "../mocks/Shots";
 
+/* Named by what each one is, with the product's name inside (Kirill, 30.10); the studio site goes last. */
 const PRODUCTS: { id: string; name: string; title: string; text: string; checks: string[]; width: number; window: React.ReactNode }[] = [
   {
-    id: "site",
-    name: "wetr.io",
-    title: "The studio's site and the CMS behind it.",
-    text: "The team edits cases, the journal, FAQ and SEO without a developer. Every enquiry is encrypted, checked for bots and viruses, and lands on the Hub's lead board within seconds.",
-    checks: ["A CMS the team runs without a developer", "Encrypted intake with bot and virus checks", "GA4, Clarity and Meta Pixel under cookie consent"],
-    width: 1440,
-    window: <SiteWindow />,
-  },
-  {
     id: "wetria",
-    name: "wetria",
-    title: "AI slide design on the client's own template.",
+    name: "AI SaaS platform",
+    title: "wetria: AI slide design on the client's own template.",
     text: "A SaaS with paying customers: upload a deck, get it back designed and still editable in PowerPoint, Keynote, Google Slides or Figma.",
     checks: ["Sign-up, plans and promo codes on Stripe", "An AI pipeline with render workers for PPTX and PDF", "Usage limits, abuse control and moderation in the Hub"],
     width: 1700,
@@ -30,12 +22,21 @@ const PRODUCTS: { id: string; name: string; title: string; text: string; checks:
   },
   {
     id: "hub",
-    name: "WeTrio Hub",
-    title: "The platform the studio runs on.",
+    name: "CRM and operations platform",
+    title: "WeTrio Hub: the platform the studio runs on.",
     text: "Clients, projects, tasks, timesheets, finance, mail and meetings in one place, with access by role. It replaced ClickUp for the whole team.",
     checks: ["Role-based access for admins, leads and designers", "Mail, meetings and chat with call transcripts", "A client portal reading the same API"],
     width: 1440,
     window: <HubWindow />,
+  },
+  {
+    id: "site",
+    name: "Website and CMS",
+    title: "wetr.io: the studio's site and the admin behind it.",
+    text: "The team edits cases, the journal, FAQ and SEO without a developer. Every enquiry is encrypted, checked for bots and viruses, and lands on the Hub's lead board within seconds.",
+    checks: ["A CMS the team runs without a developer", "Encrypted intake with bot and virus checks", "GA4, Clarity and Meta Pixel under cookie consent"],
+    width: 1440,
+    window: <SiteWindow />,
   },
 ];
 
@@ -60,8 +61,8 @@ export function Products() {
           </Reveal>
         </div>
         <Reveal as="p" delay={0.15} className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-          Three products we run every day: the studio site, a SaaS with paying customers and the platform the studio
-          works in. Same team, same stack we offer you.
+          Three products we run every day: a SaaS with paying customers, the platform the studio works in and the
+          studio site. Same team, same stack we offer you.
         </Reveal>
       </div>
 

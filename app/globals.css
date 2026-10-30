@@ -224,15 +224,24 @@ body {
   animation: swap-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* The diagram's lines carry a slow pulse of light. */
+/* The diagram's lines carry a slow pulse of light; the chip's ring of dots turns. */
 @keyframes dash {
   to {
-    stroke-dashoffset: -200;
+    stroke-dashoffset: -220;
   }
 }
 .pulse-line {
-  stroke-dasharray: 6 194;
-  animation: dash 6s linear infinite;
+  stroke-dasharray: 10 210;
+  stroke-opacity: 0.6;
+  animation: dash 5s linear infinite;
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  animation: spin-slow 9s linear infinite;
 }
 
 /* A mock sparkline draws itself once. */
@@ -265,6 +274,9 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .site-scroll {
+    animation: none;
+  }
+  .spin-slow {
     animation: none;
   }
   .reveal,
