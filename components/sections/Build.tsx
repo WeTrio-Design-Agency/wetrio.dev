@@ -144,7 +144,8 @@ function Diagram() {
           <svg viewBox="0 0 60 60" className="spin-slow h-[60%] w-[60%]" aria-hidden="true">
             {Array.from({ length: 6 }, (_, i) => {
               const a = (i / 6) * Math.PI * 2;
-              return <circle key={i} cx={30 + 20 * Math.cos(a)} cy={30 + 20 * Math.sin(a)} r="5" fill="#f4f5f7" opacity={0.55 + 0.45 * (i / 5)} />;
+              // rounded, so the server and the browser print the same digits and hydration matches
+              return <circle key={i} cx={(30 + 20 * Math.cos(a)).toFixed(2)} cy={(30 + 20 * Math.sin(a)).toFixed(2)} r="5" fill="#f4f5f7" opacity={(0.55 + 0.45 * (i / 5)).toFixed(2)} />;
             })}
           </svg>
         </span>
