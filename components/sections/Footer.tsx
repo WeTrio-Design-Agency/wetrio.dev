@@ -8,7 +8,6 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "Products", href: "#products" },
       { label: "Projects", href: "#projects" },
-      { label: "What we build", href: "#build" },
       { label: "Process", href: "#process" },
     ],
   },
@@ -19,13 +18,6 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Cases", href: "https://wetr.io/projects" },
       { label: "Journal", href: "https://wetr.io/journal" },
       { label: "Careers", href: "https://wetr.io/careers" },
-    ],
-  },
-  {
-    title: "Products",
-    links: [
-      { label: "wetria", href: "https://wetr.io/wetria" },
-      { label: "Analyzer", href: "https://wetr.io/analyzer" },
     ],
   },
   {
@@ -50,10 +42,10 @@ export function Footer() {
           </p>
           <ContactLinks order={["email", "telegram"]} place="footer" className="mt-6" />
         </div>
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-3">
           {COLUMNS.map((c) => (
             <div key={c.title}>
-              <p className="text-xs uppercase tracking-wider text-muted">{c.title}</p>
+              <p className="text-sm font-semibold text-foreground">{c.title}</p>
               <ul className="mt-4 space-y-2.5">
                 {c.links.map((l) => (
                   <li key={l.label}>

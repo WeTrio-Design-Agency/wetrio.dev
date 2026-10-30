@@ -19,7 +19,7 @@ type Props = {
   className?: string;
 };
 
-/** The three ways to reach us, as a row of small buttons. Every click is a `contact_click` event. */
+/** The three ways to reach us, as a row of buttons the size of the hero's (Kirill, 30.10). Every click is a `contact_click` event. */
 export function ContactLinks({ order = ["email", "telegram", "whatsapp"], place, className = "" }: Props) {
   return (
     <div className={`flex flex-wrap gap-2 ${className}`}>
@@ -31,7 +31,7 @@ export function ContactLinks({ order = ["email", "telegram", "whatsapp"], place,
             href={l.href}
             {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             onClick={() => trackEvent("contact_click", { channel: c, place })}
-            className={`btn btn-sm ${i === 0 ? "btn-primary" : "btn-secondary"}`}
+            className={`btn ${i === 0 ? "btn-primary" : "btn-secondary"}`}
           >
             {l.label}
           </a>
