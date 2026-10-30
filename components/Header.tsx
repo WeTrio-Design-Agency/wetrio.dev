@@ -11,7 +11,7 @@ const LINKS = [
   { href: "#faq", label: "FAQ" },
 ];
 
-/** The bar after the reference (Kirill, 30.10): the mark, the links and the button in one group on the left. */
+/** The bar: the mark and the links on the left, the white button on the right (Kirill, 30.10). */
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -51,10 +51,11 @@ export function Header() {
               {link.label}
             </a>
           ))}
-          <a href="#contact" onClick={() => trackEvent("cta_click", { place: "nav" })} className="btn btn-secondary ml-3">
-            Start a project
-          </a>
         </div>
+
+        <a href="#contact" onClick={() => trackEvent("cta_click", { place: "nav" })} className="btn btn-primary ml-auto hidden lg:inline-flex">
+          Start a project
+        </a>
 
         <button
           type="button"
