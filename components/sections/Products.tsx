@@ -9,7 +9,7 @@ import { Fit } from "../mocks/Fit";
 import { HubWindow } from "../mocks/HubWindow";
 import { SiteWindow } from "../mocks/Shots";
 
-const PRODUCTS: { id: string; name: string; title: string; text: string; checks: string[]; width: number; margin?: number; window: React.ReactNode }[] = [
+const PRODUCTS: { id: string; name: string; title: string; text: string; checks: string[]; width: number; window: React.ReactNode }[] = [
   {
     id: "site",
     name: "wetr.io",
@@ -26,7 +26,6 @@ const PRODUCTS: { id: string; name: string; title: string; text: string; checks:
     text: "Upload a deck, get it back designed and still editable in PowerPoint, Keynote, Google Slides or Figma. A SaaS with paying customers.",
     checks: ["Stripe subscriptions and promo codes", "Render workers for PPTX and PDF", "Moderation inside the Hub"],
     width: 1700,
-    margin: 0.01, // 1700 wide and squatter than the others: room on the sides would leave it short of the panel's bottom
     window: <WetriaWindow />,
   },
   {
@@ -101,10 +100,10 @@ export function Products() {
           })}
         </Reveal>
 
-        <Reveal delay={0.1} className="relative h-[260px] overflow-hidden rounded-card md:h-[440px]">
+        <Reveal delay={0.1} className="relative h-[200px] overflow-hidden rounded-card md:h-[420px]">
           <Fluid seed={2.1} />
           {/* Fit carries position and scale; the fade runs on the inner div, so the two transforms do not fight */}
-          <Fit key={current.id} width={current.width} margin={current.margin ?? 0.04} top="7%">
+          <Fit key={current.id} width={current.width}>
             <div className="swap-in">{current.window}</div>
           </Fit>
         </Reveal>

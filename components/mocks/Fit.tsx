@@ -3,27 +3,30 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Fits a product window into its panel (Kirill, 30.10: «все объекты-экраны в правой части должны быть выровнены по
- * центру; могут быть обрезаны снизу, но должно быть ровно»): the window keeps its own width, is scaled to the panel's
- * width less a margin on each side, sits centred, and runs off the bottom edge only.
+ * Fits a product window into its panel (Kirill, 30.10: «экраны по ширине одинаково, всё ровно по отступам; могут
+ * быть обрезаны снизу»): the window keeps its own width, is scaled to the panel's width less the same margin on each
+ * side, sits centred with that margin above it too, and runs off the bottom edge only. Every window gets the same
+ * margin, so they all come out the same width.
  */
-export function Fit({ width, children, margin = 0.06, top = "8%" }: { width: number; children: React.ReactNode; margin?: number; top?: string }) {
+export function Fit({ width, children, margin = 0.04 }: { width: number; children: React.ReactNode; margin?: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(0);
+  const [panel, setPanel] = useState(0);
 
   useEffect(() => {
-    const panel = ref.current?.parentElement;
-    if (!panel) return;
-    const ro = new ResizeObserver(([e]) => setScale((e.contentRect.width * (1 - 2 * margin)) / width));
-    ro.observe(panel);
+    const el = ref.current?.parentElement;
+    if (!el) return;
+    const ro = new ResizeObserver(([e]) => setPanel(e.contentRect.width));
+    ro.observe(el);
     return () => ro.disconnect();
-  }, [width, margin]);
+  }, []);
 
+  const gutter = panel * margin;
+  const scale = (panel - 2 * gutter) / width;
   return (
     <div
       ref={ref}
       className="absolute left-1/2 origin-top"
-      style={{ top, width, transform: `translateX(-50%) scale(${scale})`, visibility: scale ? "visible" : "hidden" }}
+      style={{ top: gutter, width, transform: `translateX(-50%) scale(${scale})`, visibility: panel ? "visible" : "hidden" }}
     >
       {children}
     </div>
