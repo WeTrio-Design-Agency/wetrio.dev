@@ -7,24 +7,25 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const TITLE = "WeTrio Development Lab: SaaS and web products, built to ship";
+const DESCRIPTION =
+  "A product development lab by WeTrio, a B2B design studio. Architecture, design, engineering and launch by one team. Every project runs on a real URL from the first weeks.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://wetrio.dev"),
-  title: "WeTrio Development Lab — IT & SaaS Product Development",
-  description:
-    "An IT & SaaS product development agency. We take digital products from idea to production — architecture, design, engineering, and launch.",
+  title: TITLE,
+  description: DESCRIPTION,
   openGraph: {
-    title: "WeTrio Development Lab — IT & SaaS Product Development",
-    description:
-      "An IT & SaaS product development agency. We take digital products from idea to production — architecture, design, engineering, and launch.",
+    title: TITLE,
+    description: DESCRIPTION,
     url: "https://wetrio.dev",
     siteName: "WeTrio Development Lab",
     type: "website",
   },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={inter.variable}>
       <body>{children}</body>

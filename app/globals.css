@@ -1,14 +1,18 @@
 @import "tailwindcss";
 
+/* Dark, near-black ground; the studio's blue as the only accent; Inter everywhere (Kirill, 30.10.2026:
+   the Lab's site is laid out differently from wetr.io, full-width, but keeps the colours and the type). */
 :root {
-  --background: #020617;
-  --foreground: #f8fafc;
-  --card: #0f172a;
-  --card-foreground: #f8fafc;
-  --border: #1e293b;
-  --muted: #334155;
-  --muted-foreground: #94a3b8;
+  --background: #050609;
+  --foreground: #f4f5f7;
+  --card: #0e1015;
+  --card-2: #13161d;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --muted: #71788a;
+  --muted-foreground: #a3a9b6;
   --accent: #3b82f6;
+  --accent-strong: #2563eb;
   --accent-foreground: #ffffff;
   --radius: 1rem;
 }
@@ -17,15 +21,16 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
+  --color-card-2: var(--card-2);
   --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-foreground: var(--accent-foreground);
   --radius-card: var(--radius);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: Georgia, "Times New Roman", serif;
 }
 
 html {
@@ -37,6 +42,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -44,35 +50,203 @@ body {
   color: var(--accent-foreground);
 }
 
-/* Editorial serif accent word inside headlines. Georgia's x-height is smaller
-   than Inter's, so it reads too small and sits low at a matched font-size —
-   nudge size up and tighten tracking so it sits optically on the same line. */
-.accent-italic {
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 1.05em;
-  letter-spacing: -0.012em;
+/* The page column: wide, with the same gutter as the bar. */
+.wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1480px;
+  padding-inline: 1.5rem;
+}
+@media (min-width: 768px) {
+  .wrap {
+    padding-inline: 2.5rem;
+  }
 }
 
+/* Headline: the first line white, the second grey (the reference's two-tone title). */
+.h-dim {
+  color: var(--muted-foreground);
+}
+
+/* Buttons: 40px tall, 8px radius. White is the primary on a dark ground; the outline and the blue support it. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  padding-inline: 1.125rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.btn-primary {
+  background: var(--foreground);
+  color: #0a0b0f;
+}
+.btn-primary:hover {
+  background: #ffffff;
+}
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--foreground);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.btn-accent {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+.btn-accent:hover {
+  background: var(--accent-strong);
+}
+.btn-sm {
+  height: 2rem;
+  padding-inline: 0.875rem;
+  font-size: 0.8125rem;
+}
+
+/* The small label above a section title. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 1.75rem;
+  padding-inline: 0.75rem;
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 1px var(--border);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+/* Surfaces. Cards are told apart by fill; a hairline only where a grid needs its lines. */
+.surface {
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.glass {
+  background: rgba(10, 11, 16, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+/* Card hover across WeTrio products: a blue ring and an arrow, nothing moves. */
+.card-link {
+  position: relative;
+  transition: box-shadow 0.2s ease;
+}
+.card-link:hover,
+.card-link:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent);
+  outline: none;
+}
+.card-link .card-arrow {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background: var(--accent);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.card-link:hover .card-arrow,
+.card-link:focus-visible .card-arrow {
+  opacity: 1;
+}
+
+/* Fine grain over the whole page, so the black is not flat. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Scroll reveal. */
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(18px);
   transition:
     opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0s);
 }
-
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* A panel swapping its content: the new one fades up. */
+@keyframes swap-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.swap-in {
+  animation: swap-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* The diagram's lines carry a slow pulse of light. */
+@keyframes dash {
+  to {
+    stroke-dashoffset: -200;
+  }
+}
+.pulse-line {
+  stroke-dasharray: 6 194;
+  animation: dash 6s linear infinite;
+}
+
+/* A mock sparkline draws itself once. */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.draw-line {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: draw 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .swap-in,
+  .pulse-line,
+  .draw-line {
     opacity: 1;
     transform: none;
     transition: none;
+    animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
   }
 }

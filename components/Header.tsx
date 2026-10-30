@@ -4,30 +4,12 @@ import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 
 const LINKS = [
+  { href: "#products", label: "Products" },
+  { href: "#projects", label: "Projects" },
   { href: "#build", label: "What we build" },
-  { href: "#process", label: "How we work" },
-  { href: "#capabilities", label: "Capabilities" },
-  { href: "#contact", label: "Contact" },
+  { href: "#process", label: "Process" },
+  { href: "#faq", label: "FAQ" },
 ];
-
-function ArrowIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M7 17 17 7" />
-      <path d="M7 7h10v10" />
-    </svg>
-  );
-}
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -49,91 +31,92 @@ export function Header() {
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/70 backdrop-blur-2xl" : "bg-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled || open ? "bg-background/80 backdrop-blur-xl" : "bg-transparent"
       }`}
     >
-      <div className="mx-auto max-w-6xl px-6 py-5 md:px-8">
-        <div className="relative flex items-center">
-          {/* Logo */}
-          <a href="#" className="z-10 flex flex-1 items-center" aria-label="WeTrio Dev Lab — home">
-            <Logo />
-          </a>
+      <div className="flex h-16 items-center px-6 md:px-10">
+        <a href="#top" className="z-10 flex items-center" aria-label="WeTrio Dev Lab, home">
+          <Logo />
+        </a>
 
-          {/* Center nav pill (desktop) */}
-          <div className="hidden md:block">
-            <div className="flex items-center gap-1 rounded-full border border-border/60 bg-card/30 px-2 py-2 shadow-lg backdrop-blur-2xl">
-              {LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted/30 hover:text-foreground"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* CTA (desktop) */}
-          <div className="hidden flex-1 items-center justify-end md:flex">
+        <div className="ml-10 hidden items-center gap-1 lg:flex">
+          {LINKS.map((link) => (
             <a
-              href="#contact"
-              className="rounded-full bg-accent px-7 py-3 text-sm font-medium text-accent-foreground shadow-lg shadow-accent/30 transition-all duration-300 hover:scale-105 hover:opacity-90"
+              key={link.href}
+              href={link.href}
+              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
             >
-              Start a project
+              {link.label}
             </a>
-          </div>
-
-          {/* Mobile menu button */}
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle navigation menu"
-            aria-expanded={open}
-            className="ml-auto flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-card/30 backdrop-blur-2xl md:hidden"
-          >
-            <span className="relative block h-4 w-5">
-              <span
-                className={`absolute left-0 block h-0.5 w-5 bg-foreground transition-all duration-300 ${
-                  open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
-                }`}
-              />
-              <span
-                className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 bg-foreground transition-all duration-300 ${
-                  open ? "opacity-0" : "opacity-100"
-                }`}
-              />
-              <span
-                className={`absolute left-0 block h-0.5 w-5 bg-foreground transition-all duration-300 ${
-                  open ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
-                }`}
-              />
-            </span>
-          </button>
+          ))}
         </div>
+
+        <div className="ml-auto hidden items-center gap-2 lg:flex">
+          <a
+            href="https://demo.wetrio.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
+          >
+            Demos
+          </a>
+          <a href="#contact" className="btn btn-primary">
+            Start a project
+          </a>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={open}
+          className="ml-auto flex h-10 w-10 items-center justify-center rounded-md bg-white/5 lg:hidden"
+        >
+          <span className="relative block h-4 w-5">
+            <span
+              className={`absolute left-0 block h-0.5 w-5 bg-foreground transition-all duration-300 ${
+                open ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
+              }`}
+            />
+            <span
+              className={`absolute left-0 top-1/2 block h-0.5 w-5 -translate-y-1/2 bg-foreground transition-all duration-300 ${
+                open ? "opacity-0" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`absolute left-0 block h-0.5 w-5 bg-foreground transition-all duration-300 ${
+                open ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
+              }`}
+            />
+          </span>
+        </button>
       </div>
 
-      {/* Mobile menu panel */}
       {open && (
-        <div className="border-t border-border bg-background/95 backdrop-blur-2xl md:hidden">
-          <div className="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-4">
+        <div className="h-[calc(100dvh-4rem)] overflow-y-auto bg-background/95 backdrop-blur-xl lg:hidden">
+          <div className="flex flex-col gap-1 px-6 py-4">
             {LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-xl px-4 py-3 text-base text-muted-foreground transition-colors hover:bg-muted/30 hover:text-foreground"
+                className="rounded-md px-3 py-3 text-base text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
               >
                 {link.label}
               </a>
             ))}
             <a
-              href="#contact"
+              href="https://demo.wetrio.dev"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-2 flex items-center justify-center gap-1.5 rounded-full bg-accent px-7 py-3 text-sm font-medium text-accent-foreground"
+              className="rounded-md px-3 py-3 text-base text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
             >
-              Start a project <ArrowIcon />
+              Demos
+            </a>
+            <a href="#contact" onClick={() => setOpen(false)} className="btn btn-primary mt-3">
+              Start a project
             </a>
           </div>
         </div>
