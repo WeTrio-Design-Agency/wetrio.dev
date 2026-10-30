@@ -41,6 +41,21 @@ const NAV_CLIENTS: [GlyphName, string][] = [
   ["target", "Pipeline"],
   ["chat", "Feedback"],
 ];
+const NAV_MONEY: [GlyphName, string][] = [
+  ["wallet", "Finance"],
+  ["chart", "Insights"],
+  ["megaphone", "Marketing"],
+];
+const NAV_TEAM: [GlyphName, string][] = [
+  ["users", "People"],
+  ["gauge", "Workload"],
+  ["clock", "Hours"],
+  ["userPlus", "Hiring"],
+];
+const NAV_WORKSPACE: [GlyphName, string][] = [
+  ["book", "Knowledge"],
+  ["plug", "Integrations"],
+];
 
 const MONTHS = [
   ["Nov 25", 19.4, 15.2],
@@ -341,10 +356,10 @@ function NavRow({ icon, label, active = false }: { icon: GlyphName; label: strin
   );
 }
 
-function NavGroup({ label, open = true }: { label: string; open?: boolean }) {
+function NavGroup({ label }: { label: string }) {
   return (
     <p className="mb-1 mt-4 flex items-center gap-1 px-3 text-[12px] font-medium" style={{ color: C.t3 }}>
-      {label} <Glyph name={open ? "chevron" : "chevronRight"} className="h-3 w-3" />
+      {label} <Glyph name="chevron" className="h-3 w-3" />
     </p>
   );
 }
@@ -412,10 +427,25 @@ export function HubWindow() {
             <NavRow key={label} icon={icon} label={label} />
           ))}
         </ul>
-        <NavGroup label="Money" open={false} />
-        <NavGroup label="Team" open={false} />
-        <NavGroup label="Workspace" open={false} />
-        <div className="mt-auto rounded-2xl p-3" style={{ background: C.elevated }}>
+        <NavGroup label="Money" />
+        <ul className="space-y-0.5">
+          {NAV_MONEY.map(([icon, label]) => (
+            <NavRow key={label} icon={icon} label={label} />
+          ))}
+        </ul>
+        <NavGroup label="Team" />
+        <ul className="space-y-0.5">
+          {NAV_TEAM.map(([icon, label]) => (
+            <NavRow key={label} icon={icon} label={label} />
+          ))}
+        </ul>
+        <NavGroup label="Workspace" />
+        <ul className="space-y-0.5">
+          {NAV_WORKSPACE.map(([icon, label]) => (
+            <NavRow key={label} icon={icon} label={label} />
+          ))}
+        </ul>
+        <div className="mt-6 rounded-2xl p-3" style={{ background: C.elevated }}>
           <div className="flex items-center gap-3">
             <span className="grid h-9 w-9 place-items-center rounded-full text-[12px] font-medium" style={{ background: C.subtle, color: C.t1 }}>
               MK
