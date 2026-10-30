@@ -13,7 +13,7 @@ export function Faq() {
       {/* the words on the left, the questions on the right level with the heading (Kirill, 30.10) */}
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:items-start lg:gap-16">
         <div>
-          <Reveal as="h2" className="text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl lg:text-[clamp(2.75rem,4.2vw,3.75rem)]">
+          <Reveal as="h2" className="text-[2.125rem] font-medium leading-[1.06] tracking-[-0.03em] md:text-[3.25rem] lg:text-[clamp(2.25rem,3.3vw,3.5rem)]">
             Questions,
             <br />
             <span className="h-dim">answered.</span>
