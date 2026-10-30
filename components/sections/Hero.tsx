@@ -11,19 +11,20 @@ import { HubWindow } from "../mocks/HubWindow";
 export function Hero() {
   return (
     <section id="top" className="relative pt-20">
-      <div className="grid min-h-[calc(100svh-5rem)] grid-cols-1 lg:grid-cols-[minmax(0,45%)_minmax(0,55%)]">
+      <div className="grid min-h-[calc(100svh-5rem)] grid-cols-1 lg:grid-cols-[minmax(0,48%)_minmax(0,52%)]">
         {/* the words */}
-        <div className="flex flex-col justify-center px-6 pb-12 pt-16 md:px-10 lg:py-24 lg:pl-10 lg:pr-16">
-          <Reveal as="h1" className="text-[2.75rem] font-medium leading-[1.02] tracking-[-0.03em] md:text-6xl lg:text-[clamp(3rem,5.4vw,5.25rem)]">
-            SaaS and web
-            <br />
-            products,
-            <br />
-            <span className="h-dim">built to ship.</span>
+        <div className="flex flex-col justify-center px-6 pb-12 pt-16 md:px-10 lg:justify-end lg:pb-20 lg:pl-10 lg:pr-10 lg:pt-24">
+          <Reveal as="h1" className="text-[2.125rem] font-medium leading-[1.06] tracking-[-0.03em] md:text-[3.25rem] lg:text-[clamp(2.25rem,3.3vw,3.5rem)]">
+            Architecture, design,{" "}
+            <br className="hidden md:block" />
+            engineering and{" "}
+            {/* «by one team.» stays on the line with «launch» (Kirill, 30.10) */}
+            <span className="whitespace-nowrap">
+              launch <span className="h-dim">by one team.</span>
+            </span>
           </Reveal>
           <Reveal as="p" delay={0.2} className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Architecture, design, engineering and launch by one team. A design studio&apos;s dev lab: interfaces people
-            want to use, code that holds in production.
+            A design studio&apos;s dev lab: interfaces people want to use, code that holds in production.
           </Reveal>
           <Reveal delay={0.3} className="mt-10 flex flex-wrap items-center gap-3">
             <a href="#contact" className="btn btn-primary">

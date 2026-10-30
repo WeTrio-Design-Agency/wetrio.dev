@@ -22,8 +22,8 @@ const html = `<!doctype html><html><head><meta charset="utf-8">
   .scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,6,9,.94) 0%,rgba(5,6,9,.8) 42%,rgba(5,6,9,.1) 78%,rgba(5,6,9,0) 100%)}
   .logo{position:absolute;left:72px;top:64px;display:inline-flex;flex-direction:column;align-items:flex-end;gap:5px}
   .logo svg:first-child{height:34px;width:auto}.logo svg:last-child{height:20px;width:auto}
-  .text{position:absolute;left:72px;top:232px}
-  h1{margin:0;font-size:64px;line-height:1.04;letter-spacing:-.03em;font-weight:500}
+  .text{position:absolute;left:72px;top:196px}
+  h1{margin:0;font-size:56px;line-height:1.06;letter-spacing:-.03em;font-weight:500}
   h1 span{color:#3b82f6}
   p{margin:26px 0 0;font-size:25px;line-height:1.4;color:#a3a9b6;max-width:760px}
   .url{position:absolute;right:72px;bottom:56px;font-size:22px;color:rgba(255,255,255,.72)}
@@ -31,7 +31,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8">
 <canvas id="c" width="600" height="315"></canvas>
 <div class="scrim"></div>
 <div class="logo">${wordmark}${devlab}</div>
-<div class="text"><h1>SaaS and web products,<br><span>built to ship.</span></h1><p>Architecture, design, engineering and launch by one team.</p></div>
+<div class="text"><h1>Architecture, design,<br>engineering and<br>launch <span>by one team.</span></h1><p>A design studio's dev lab: interfaces people want to use, code that holds in production.</p></div>
 <div class="url">wetrio.dev</div>
 <script>
 const gl=document.getElementById('c').getContext('webgl',{preserveDrawingBuffer:true});
