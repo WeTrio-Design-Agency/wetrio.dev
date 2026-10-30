@@ -1,4 +1,6 @@
+import { type GlyphName } from "../Icons";
 import { Reveal } from "../Reveal";
+import { StackIcon } from "../mocks/Windows";
 
 const STEPS = [
   {
@@ -19,20 +21,33 @@ const STEPS = [
   },
 ];
 
-const PRINCIPLES = [
+/* Four principles under four steps: the two grids share columns, so their dividers line up. */
+const PRINCIPLES: { title: string; text: string; icon: GlyphName }[] = [
   {
     title: "Working software from week one",
     text: "Every project is a live deployment from the first weeks. Reviews happen in the browser, on the real thing.",
+    icon: "browser",
   },
   {
     title: "Design is part of the build",
     text: "The Lab shares one design language with the studio. Speed never excuses a careless interface.",
+    icon: "layers",
   },
   {
     title: "A small senior team",
     text: "The people who scope the product build it. No hand-offs between departments, no six-month roadmaps before the first click.",
+    icon: "users",
+  },
+  {
+    title: "You own the code",
+    text: "The repository, the infrastructure and the accounts are yours from day one. Leaving is never a negotiation.",
+    icon: "key",
   },
 ];
+
+/* Each cell is a subgrid of three rows (number or icon, title, text), so titles and texts align across the row even when one wraps. */
+const cell = "grid grid-rows-subgrid row-span-3 p-7 md:p-8";
+const grid = "grid grid-cols-1 gap-px overflow-hidden rounded-card bg-white/[0.08] md:grid-cols-2 xl:grid-cols-4";
 
 export function Process() {
   return (
@@ -54,9 +69,9 @@ export function Process() {
         </Reveal>
       </div>
 
-      <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-card bg-white/[0.08] md:grid-cols-2 xl:grid-cols-4">
+      <div className={`mt-14 ${grid}`}>
         {STEPS.map((s, i) => (
-          <Reveal key={s.title} delay={0.06 * i} className="bg-card p-7 md:p-8">
+          <Reveal key={s.title} delay={0.06 * i} className={`${cell} bg-card`}>
             <span className="text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
             <h3 className="mt-10 text-xl font-medium tracking-tight">{s.title}</h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">{s.text}</p>
@@ -64,10 +79,11 @@ export function Process() {
         ))}
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-card bg-white/[0.08] md:grid-cols-3">
+      <div className={`mt-6 ${grid}`}>
         {PRINCIPLES.map((p, i) => (
-          <Reveal key={p.title} delay={0.06 * i} className="bg-background p-7 md:p-8">
-            <h3 className="text-lg font-medium tracking-tight">{p.title}</h3>
+          <Reveal key={p.title} delay={0.06 * i} className={`${cell} bg-background`}>
+            <StackIcon name={p.icon} />
+            <h3 className="mt-10 text-lg font-medium tracking-tight">{p.title}</h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">{p.text}</p>
           </Reveal>
         ))}

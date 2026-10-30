@@ -202,6 +202,18 @@ const GLYPHS: Record<string, React.ReactNode> = {
   ),
   plug: <path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0V8ZM12 17v4" />,
   layers: <path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5m-18 4 9 5 9-5" />,
+  browser: (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M3 9h18M6.5 6.5h.01M9.5 6.5h.01" />
+    </>
+  ),
+  key: (
+    <>
+      <circle cx="7.5" cy="15.5" r="4.5" />
+      <path d="m10.7 12.3 9.3-9.3M17 6l3 3M14 9l3 3" />
+    </>
+  ),
 };
 
 export function Glyph({ name, className = "h-5 w-5" }: IconProps & { name: keyof typeof GLYPHS }) {
