@@ -13,6 +13,7 @@
   --muted-foreground: #a3a9b6;
   --accent: #3b82f6;
   --accent-strong: #2563eb;
+  --accent-ink: #60a5fa; /* the lighter blue for small marks on black, as the Hub prints "Hub" */
   --accent-foreground: #ffffff;
   --radius: 1rem;
 }
@@ -28,6 +29,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
+  --color-accent-ink: var(--accent-ink);
   --color-accent-foreground: var(--accent-foreground);
   --radius-card: var(--radius);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
