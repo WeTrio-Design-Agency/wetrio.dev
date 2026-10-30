@@ -9,7 +9,7 @@ const WORK = [
   {
     name: "SaaS platforms",
     title: "Multi-tenant products for subscription businesses.",
-    text: "Auth, billing, roles, admin and usage limits. The full platform, not a demo.",
+    text: "Auth, billing, roles, admin and usage limits: everything a subscription product needs on day one.",
     checks: ["Stripe subscriptions and invoices", "Roles and workspaces", "Admin and moderation tools", "Usage limits and abuse control"],
   },
   {
@@ -27,7 +27,7 @@ const WORK = [
   {
     name: "AI features and automation",
     title: "Assistants, summarisers and classifiers inside real workflows.",
-    text: "AI measured by usefulness: what it saves the team, not what it demos.",
+    text: "Built into the tools a team already uses and measured by the hours it saves.",
     checks: ["Claude and OpenAI models", "Call transcripts and summaries", "Document rendering and checks"],
   },
   {

@@ -15,7 +15,6 @@ export const STUDIO_ORG_ID = `${STUDIO_ORIGIN}/#organization`;
 export const CONTACT_EMAIL = "start@wetr.io";
 export const TELEGRAM_URL = "https://t.me/wetr_io";
 export const WHATSAPP_URL = "https://wa.me/48506782768";
-export const DEMOS_URL = "https://demo.wetrio.dev";
 
 /**
  * The GTM container, set in Coolify as NEXT_PUBLIC_GTM_ID. Blank means no analytics at all: the container is

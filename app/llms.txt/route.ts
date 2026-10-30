@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL, DEMOS_URL, DESCRIPTION, SITE_NAME, SITE_ORIGIN, STUDIO_ORIGIN, TELEGRAM_URL } from "@/lib/site";
+import { CONTACT_EMAIL, DESCRIPTION, SITE_NAME, SITE_ORIGIN, STUDIO_ORIGIN, TELEGRAM_URL } from "@/lib/site";
 import { FAQ } from "@/lib/faq";
 
 /** /llms.txt: the facts an answer engine can quote, every line said on the page too. */
@@ -23,11 +23,10 @@ export function GET() {
     `- Analyzer (${STUDIO_ORIGIN}/analyzer): a free design check of a deck or a website with a scored report.`,
     `- wetr.io (${STUDIO_ORIGIN}) and its admin: the studio site and the CMS behind it, with an encrypted intake for leads.`,
     "",
-    "## Live demos",
+    "## Front-end builds by the Lab",
     "- Nordhaus (https://nordhaus.demo.wetrio.dev): a scroll-driven landing page for an architecture practice, vanilla JS.",
     "- Halden Gallery (https://halden.demo.wetrio.dev): a virtual showroom in WebGL, Three.js.",
     "- Parklab (https://parklab.demo.wetrio.dev/overview.html): six design directions for a playground builder with WebGL models.",
-    `- All demos: ${DEMOS_URL}`,
     "",
     "## How we work",
     "- A scoped, fixed-price first sprint after one call; a clickable prototype on its own URL usually two to four weeks after the brief.",

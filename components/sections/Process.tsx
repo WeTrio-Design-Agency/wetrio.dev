@@ -23,7 +23,7 @@ const STEPS = [
 const PRINCIPLES = [
   {
     title: "Working software from week one",
-    text: "Every project is a live deployment from the first weeks. We demo URLs, not slides.",
+    text: "Every project is a live deployment from the first weeks. Reviews happen in the browser, on the real thing.",
   },
   {
     title: "Design is part of the build",

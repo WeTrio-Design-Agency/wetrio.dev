@@ -10,7 +10,6 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
       { label: "Projects", href: "#projects" },
       { label: "What we build", href: "#build" },
       { label: "Process", href: "#process" },
-      { label: "Demos", href: "https://demo.wetrio.dev" },
     ],
   },
   {
@@ -27,7 +26,6 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "wetria", href: "https://wetr.io/wetria" },
       { label: "Analyzer", href: "https://wetr.io/analyzer" },
-      { label: "Client portal", href: "https://portal.wetr.io" },
     ],
   },
   {

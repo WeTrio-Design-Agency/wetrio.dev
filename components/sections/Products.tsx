@@ -13,27 +13,27 @@ const PRODUCTS: { id: string; name: string; title: string; text: string; checks:
   {
     id: "site",
     name: "wetr.io",
-    title: "The studio site.",
-    text: "Cases, journal, FAQ and SEO edited by the team in its own admin. Leads arrive encrypted, pass Turnstile and reach the Hub.",
-    checks: ["Content edited by the team, not by code", "Encrypted intake with a virus scan", "GA4, Clarity and Meta under consent"],
+    title: "The studio's site and the CMS behind it.",
+    text: "The team edits cases, the journal, FAQ and SEO without a developer. Every enquiry is encrypted, checked for bots and viruses, and lands on the Hub's lead board within seconds.",
+    checks: ["A CMS the team runs without a developer", "Encrypted intake with bot and virus checks", "GA4, Clarity and Meta Pixel under cookie consent"],
     width: 1440,
     window: <SiteWindow />,
   },
   {
     id: "wetria",
     name: "wetria",
-    title: "AI slide design on your own template.",
-    text: "Upload a deck, get it back designed and still editable in PowerPoint, Keynote, Google Slides or Figma. A SaaS with paying customers.",
-    checks: ["Stripe subscriptions and promo codes", "Render workers for PPTX and PDF", "Moderation inside the Hub"],
+    title: "AI slide design on the client's own template.",
+    text: "A SaaS with paying customers: upload a deck, get it back designed and still editable in PowerPoint, Keynote, Google Slides or Figma.",
+    checks: ["Sign-up, plans and promo codes on Stripe", "An AI pipeline with render workers for PPTX and PDF", "Usage limits, abuse control and moderation in the Hub"],
     width: 1700,
     window: <WetriaWindow />,
   },
   {
     id: "hub",
     name: "WeTrio Hub",
-    title: "The studio runs on it.",
-    text: "Clients, projects, tasks, timesheets, finance, mail and meetings in one place. Role-based access, a Telegram bot and a daily digest.",
-    checks: ["Replaced ClickUp for the whole team", "Mail, meetings and chat with transcripts", "The client portal reads from the same API"],
+    title: "The platform the studio runs on.",
+    text: "Clients, projects, tasks, timesheets, finance, mail and meetings in one place, with access by role. It replaced ClickUp for the whole team.",
+    checks: ["Role-based access for admins, leads and designers", "Mail, meetings and chat with call transcripts", "A client portal reading the same API"],
     width: 1440,
     window: <HubWindow />,
   },
@@ -60,8 +60,8 @@ export function Products() {
           </Reveal>
         </div>
         <Reveal as="p" delay={0.15} className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-          Our own operations platform, a SaaS with paying customers and the studio site. Same team, same stack we offer
-          you.
+          Three products we run every day: the studio site, a SaaS with paying customers and the platform the studio
+          works in. Same team, same stack we offer you.
         </Reveal>
       </div>
 

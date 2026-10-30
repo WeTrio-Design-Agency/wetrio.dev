@@ -3,12 +3,28 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Fits a product window into its panel (Kirill, 30.10: «экраны по ширине одинаково, всё ровно по отступам; могут
- * быть обрезаны снизу»): the window keeps its own width, is scaled to the panel's width less the same margin on each
- * side, sits centred with that margin above it too, and runs off the bottom edge only. Every window gets the same
- * margin, so they all come out the same width.
+ * Places a product window inside its panel and scales it with the panel (Kirill, 30.10: «картинка должна
+ * адаптироваться под размер»). The window keeps its own layout width; `span` says how wide it is as a share of the
+ * panel's width, `x` and `y` where its top-left corner sits, as shares of the panel's width. With the defaults the
+ * window sits centred with the same 4% gutter on three sides and runs off the bottom (the Products panel); the hero
+ * passes a span over 1 so the window runs off the right edge too, as the reference does.
  */
-export function Fit({ width, children, margin = 0.04 }: { width: number; children: React.ReactNode; margin?: number }) {
+export function Fit({
+  width,
+  children,
+  span = 0.92,
+  x = (1 - span) / 2,
+  y = 0.04,
+  narrow,
+}: {
+  width: number;
+  children: React.ReactNode;
+  span?: number;
+  x?: number;
+  y?: number;
+  /** The same three numbers for a panel under 640px wide, where a wider window keeps the picture legible. */
+  narrow?: { span: number; x: number; y: number };
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const [panel, setPanel] = useState(0);
 
@@ -20,13 +36,13 @@ export function Fit({ width, children, margin = 0.04 }: { width: number; childre
     return () => ro.disconnect();
   }, []);
 
-  const gutter = panel * margin;
-  const scale = (panel - 2 * gutter) / width;
+  const p = panel < 640 && narrow ? narrow : { span, x, y };
+  const scale = (panel * p.span) / width;
   return (
     <div
       ref={ref}
-      className="absolute left-1/2 origin-top"
-      style={{ top: gutter, width, transform: `translateX(-50%) scale(${scale})`, visibility: panel ? "visible" : "hidden" }}
+      className="absolute origin-top-left"
+      style={{ left: panel * p.x, top: panel * p.y, width, transform: `scale(${scale})`, visibility: panel ? "visible" : "hidden" }}
     >
       {children}
     </div>

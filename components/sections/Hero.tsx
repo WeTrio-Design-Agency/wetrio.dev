@@ -1,12 +1,18 @@
 import { Fluid } from "../Fluid";
 import { Spark } from "../Icons";
 import { Reveal } from "../Reveal";
+import { Fit } from "../mocks/Fit";
 import { HubWindow } from "../mocks/HubWindow";
 
+/**
+ * The fold after the reference (Kirill, 30.10): the words in the left column, the picture a panel that runs from
+ * under the bar to the right edge and the bottom of the first screen, the Hub window inside it scaled with the
+ * panel and cut by its right and bottom edges. On a phone the panel sits under the words.
+ */
 export function Hero() {
   return (
     <section id="top" className="relative pt-20">
-      <div className="grid min-h-[calc(100svh-5rem)] grid-cols-1 lg:grid-cols-[minmax(0,46%)_minmax(0,54%)]">
+      <div className="grid min-h-[calc(100svh-5rem)] grid-cols-1 lg:grid-cols-[minmax(0,45%)_minmax(0,55%)]">
         {/* the words */}
         <div className="flex flex-col justify-center px-6 pb-12 pt-16 md:px-10 lg:py-24 lg:pl-10 lg:pr-16">
           <Reveal>
@@ -36,14 +42,13 @@ export function Hero() {
           </Reveal>
         </div>
 
-        {/* the picture: the moving blue ground and the Hub window over it, bleeding off the right edge */}
-        <div className="relative mx-6 mb-6 h-[440px] overflow-hidden rounded-[28px] md:mx-10 md:h-[560px] lg:m-0 lg:mb-0 lg:h-auto lg:min-h-[640px] lg:rounded-l-[28px] lg:rounded-r-none">
+        <div className="relative mx-6 mb-6 h-[400px] overflow-hidden rounded-[28px] md:mx-10 md:h-[560px] lg:m-0 lg:h-auto lg:min-h-[640px] lg:rounded-r-none">
           <Fluid seed={0.3} />
-          <div className="absolute left-[6%] top-[8%] origin-top-left [transform:scale(0.42)] sm:[transform:scale(0.6)] lg:[transform:scale(0.72)] xl:[transform:scale(0.8)] 2xl:[transform:scale(0.9)]">
-            <Reveal delay={0.35}>
+          <Reveal delay={0.35} className="absolute inset-0">
+            <Fit width={1440} span={1.22} x={0.07} y={0.08} narrow={{ span: 1.6, x: 0.07, y: 0.08 }}>
               <HubWindow />
-            </Reveal>
-          </div>
+            </Fit>
+          </Reveal>
         </div>
       </div>
     </section>

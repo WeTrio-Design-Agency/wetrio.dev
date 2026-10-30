@@ -7,6 +7,8 @@ type RevealProps = {
   delay?: number;
   className?: string;
   as?: "div" | "section" | "p" | "h1" | "h2" | "h3" | "span" | "li";
+  /** Marks the element as the panel that clips its children (the Select reads it to pick which way to open). */
+  clip?: boolean;
 };
 
 export function Reveal({
@@ -14,6 +16,7 @@ export function Reveal({
   delay = 0,
   className = "",
   as: Tag = "div",
+  clip = false,
 }: RevealProps) {
   const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
@@ -40,6 +43,7 @@ export function Reveal({
       ref={ref as any}
       className={`reveal ${visible ? "is-visible" : ""} ${className}`}
       style={{ "--reveal-delay": `${delay}s` } as CSSProperties}
+      {...(clip ? { "data-clip": "" } : {})}
     >
       {children}
     </Tag>

@@ -8,34 +8,34 @@ type Project = {
   meta: string;
   href: string;
   image: string;
-  kind: "Live demo" | "Website";
+  by: "lab" | "studio";
 };
 
-/* Demos run on their own subdomains; the websites are studio cases that are public on wetr.io. */
+/* The Lab's own front-end builds on their subdomains, and websites the studio designed (public cases on wetr.io). */
 const PROJECTS: Project[] = [
   {
     title: "Nordhaus",
-    text: "A scroll-driven landing page for an architecture practice: masked reveals, a pinned work section, a sticky card stack.",
+    text: "A landing page for an architecture practice: masked reveals, a pinned work section and a sticky card stack, all driven by scroll.",
     meta: "Vanilla JS · no dependencies · 30 KB",
     href: "https://nordhaus.demo.wetrio.dev",
     image: "/demos/nordhaus.jpg",
-    kind: "Live demo",
+    by: "lab",
   },
   {
     title: "Halden Gallery",
-    text: "A virtual showroom in WebGL. Four full-scale interiors in one enfilade, the scroll wheel walks the camera through them.",
+    text: "A virtual showroom in WebGL: four full-scale interiors in one enfilade, the scroll wheel walks the camera through them.",
     meta: "Three.js · procedural geometry",
     href: "https://halden.demo.wetrio.dev",
     image: "/demos/halden.jpg",
-    kind: "Live demo",
+    by: "lab",
   },
   {
     title: "Parklab",
-    text: "Six design directions for a playground builder in one header. Each carries a WebGL model you can orbit and re-finish.",
+    text: "Six design directions for a playground builder in one header, each with a 3D model you can orbit and re-finish.",
     meta: "Three.js · image-to-3D",
     href: "https://parklab.demo.wetrio.dev/overview.html",
     image: "/demos/parklab.jpg",
-    kind: "Live demo",
+    by: "lab",
   },
   {
     title: "Invideos / MaaS",
@@ -43,7 +43,7 @@ const PROJECTS: Project[] = [
     meta: "SaaS landing page",
     href: "https://wetr.io/projects/invideos-maas-saas-landing-page",
     image: "/cases/invideos-maas-saas-landing-page.webp",
-    kind: "Website",
+    by: "studio",
   },
   {
     title: "AutoPharm",
@@ -51,7 +51,7 @@ const PROJECTS: Project[] = [
     meta: "Corporate website",
     href: "https://wetr.io/projects/autopharm-pharmaceutical-automation-website",
     image: "/cases/autopharm-pharmaceutical-automation-website.webp",
-    kind: "Website",
+    by: "studio",
   },
   {
     title: "Snappymob",
@@ -59,7 +59,7 @@ const PROJECTS: Project[] = [
     meta: "Landing page",
     href: "https://wetr.io/projects/snappymob-landing-page-design",
     image: "/cases/snappymob-landing-page-design.webp",
-    kind: "Website",
+    by: "studio",
   },
   {
     title: "Sensin",
@@ -67,7 +67,7 @@ const PROJECTS: Project[] = [
     meta: "E-commerce website",
     href: "https://wetr.io/projects/sensin-personal-care-website",
     image: "/cases/sensin-personal-care-website.webp",
-    kind: "Website",
+    by: "studio",
   },
   {
     title: "Yuwab",
@@ -75,7 +75,7 @@ const PROJECTS: Project[] = [
     meta: "Multi-page website",
     href: "https://wetr.io/projects/yuwab-coaching-website-design",
     image: "/cases/yuwab-coaching-website-design.webp",
-    kind: "Website",
+    by: "studio",
   },
 ];
 
@@ -91,35 +91,25 @@ export function Projects() {
             </span>
           </Reveal>
           <Reveal as="h2" delay={0.1} className="mt-6 text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
-            Demos you can click,
+            Selected work,
             <br />
-            <span className="h-dim">sites that went live.</span>
+            <span className="h-dim">all of it live.</span>
           </Reveal>
         </div>
-        <Reveal delay={0.15} className="flex flex-col gap-5">
+        <Reveal delay={0.15} className="flex flex-col items-start gap-5">
           <p className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-            Three front-end demos on their own subdomains and five websites designed by the studio.
+            Front-end builds by the Lab alongside websites designed by the studio.
           </p>
-          <div className="flex flex-wrap gap-3">
-            <a href="https://demo.wetrio.dev" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-              All demos
-            </a>
-            <a href="https://wetr.io/projects" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-              All studio cases
-            </a>
-          </div>
+          <a href="https://wetr.io/projects" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+            All studio cases
+          </a>
         </Reveal>
       </div>
 
       <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
         {PROJECTS.map((p, i) => (
           <Reveal key={p.title} delay={0.05 * (i % 4)}>
-            <a
-              href={p.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card-link surface block h-full rounded-card p-3"
-            >
+            <a href={p.href} target="_blank" rel="noopener noreferrer" className="card-link surface block h-full rounded-card p-3">
               <span className="card-arrow">
                 <ArrowUpRight className="h-4 w-4" />
               </span>
@@ -135,7 +125,9 @@ export function Projects() {
               <div className="px-3 pb-3 pt-5">
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-lg font-medium">{p.title}</span>
-                  <span className={`text-xs ${p.kind === "Live demo" ? "text-accent" : "text-muted"}`}>{p.kind}</span>
+                  <span className={`shrink-0 text-xs ${p.by === "lab" ? "text-accent" : "text-muted"}`}>
+                    {p.by === "lab" ? "Built by the Lab" : "Designed by the studio"}
+                  </span>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>
                 <p className="mt-3 text-xs text-muted">{p.meta}</p>

@@ -3,16 +3,15 @@
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import { trackEvent } from "@/lib/analytics/track";
-import { DEMOS_URL } from "@/lib/site";
 
 const LINKS = [
   { href: "#products", label: "Products" },
   { href: "#projects", label: "Projects" },
-  { href: "#build", label: "What we build" },
   { href: "#process", label: "Process" },
   { href: "#faq", label: "FAQ" },
 ];
 
+/** The bar after the reference (Kirill, 30.10): the mark, the links and the button in one group on the left. */
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -42,7 +41,7 @@ export function Header() {
           <Logo />
         </a>
 
-        <div className="ml-10 hidden items-center gap-1 lg:flex">
+        <div className="ml-8 hidden items-center gap-1 lg:flex">
           {LINKS.map((link) => (
             <a
               key={link.href}
@@ -52,18 +51,7 @@ export function Header() {
               {link.label}
             </a>
           ))}
-        </div>
-
-        <div className="ml-auto hidden items-center gap-2 lg:flex">
-          <a
-            href={DEMOS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
-          >
-            Demos
-          </a>
-          <a href="#contact" onClick={() => trackEvent("cta_click", { place: "nav" })} className="btn btn-primary">
+          <a href="#contact" onClick={() => trackEvent("cta_click", { place: "nav" })} className="btn btn-secondary ml-3">
             Start a project
           </a>
         </div>
@@ -108,15 +96,6 @@ export function Header() {
                 {link.label}
               </a>
             ))}
-            <a
-              href={DEMOS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-              className="rounded-md px-3 py-3 text-base text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground"
-            >
-              Demos
-            </a>
             <a
               href="#contact"
               onClick={() => {

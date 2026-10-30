@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics/track";
 import { CONTACT_EMAIL } from "@/lib/site";
+import { Select } from "./Select";
 
 const SERVICES = [
   { id: "saas", label: "SaaS platform" },
@@ -62,7 +63,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="contact-email" className="mb-1.5 block text-sm text-white/70">
-            Email
+            Work email
           </label>
           <input
             id="contact-email"
@@ -79,37 +80,9 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="contact-service" className="mb-1.5 block text-sm text-white/70">
-          What do you need?
+          What are you building?
         </label>
-        <div className="relative">
-          <select
-            id="contact-service"
-            value={service}
-            onChange={(e) => setService(e.target.value)}
-            className={`${field} appearance-none pr-10 ${service ? "" : "text-white/40"}`}
-          >
-            <option value="" disabled>
-              Choose one
-            </option>
-            {SERVICES.map((s) => (
-              <option key={s.id} value={s.id} className="bg-card text-foreground">
-                {s.label}
-              </option>
-            ))}
-          </select>
-          <svg
-            viewBox="0 0 24 24"
-            className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </div>
+        <Select id="contact-service" value={service} onChange={setService} options={SERVICES} placeholder="Choose one" className={field} />
       </div>
 
       <div>
