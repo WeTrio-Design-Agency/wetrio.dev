@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Glyph, type GlyphName } from "../Icons";
-import { WeTrioWordmark } from "../Logo";
+import { HubLogo } from "./HubLogo";
 
 /**
  * The Hub's Home in the dark theme, after Kirill's own screen of it (30.10.2026) and the Hub's code
@@ -390,12 +390,7 @@ export function HubWindow() {
     >
       <aside className="flex w-[280px] shrink-0 flex-col px-4 pb-4 pt-5" style={{ borderRight: `1px solid ${C.subtle}` }}>
         <div className="flex items-center">
-          <span className="inline-flex flex-col items-end gap-[2px] pl-2">
-            <WeTrioWordmark className="h-[18px] w-auto" />
-            <span className="font-serif text-[13px] italic leading-none" style={{ color: C.ink }}>
-              Hub
-            </span>
-          </span>
+          <HubLogo className="ml-2 h-8 w-auto" />
           <span className="ml-auto flex gap-1" style={{ color: C.t3 }}>
             <span className="grid h-9 w-9 place-items-center rounded-lg">
               <Glyph name="search" className="h-4 w-4" />
