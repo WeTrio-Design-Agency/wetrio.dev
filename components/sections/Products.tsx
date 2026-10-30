@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Fluid } from "../Fluid";
-import { Spark } from "../Icons";
 import { Reveal } from "../Reveal";
 import { Checks, WetriaWindow } from "../mocks/Windows";
 import { Fit } from "../mocks/Fit";
@@ -48,13 +47,7 @@ export function Products() {
     <section id="products" className="wrap scroll-mt-20 py-20 md:py-32">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
-          <Reveal>
-            <span className="tag">
-              <Spark className="h-3 w-3 text-foreground" />
-              Products
-            </span>
-          </Reveal>
-          <Reveal as="h2" delay={0.1} className="mt-6 text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
+          <Reveal as="h2" className="text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
             Products we build
             <br />
             <span className="h-dim">and keep running.</span>

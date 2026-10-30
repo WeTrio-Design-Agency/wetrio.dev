@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Minus, Plus, Spark } from "../Icons";
+import { Minus, Plus } from "../Icons";
 import { Reveal } from "../Reveal";
 import { FAQ } from "@/lib/faq";
 
@@ -13,13 +13,7 @@ export function Faq() {
       {/* the words on the left, the questions on the right level with the heading (Kirill, 30.10) */}
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:items-start lg:gap-16">
         <div>
-          <Reveal>
-            <span className="tag">
-              <Spark className="h-3 w-3 text-foreground" />
-              FAQ
-            </span>
-          </Reveal>
-          <Reveal as="h2" delay={0.1} className="mt-6 text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
+          <Reveal as="h2" className="text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
             Questions,
             <br />
             <span className="h-dim">answered.</span>
@@ -29,8 +23,7 @@ export function Faq() {
           </Reveal>
         </div>
 
-        {/* 28px tag + 24px gap: the first question lines up with the top of the heading */}
-        <Reveal delay={0.1} className="surface rounded-card lg:mt-[52px]">
+        <Reveal delay={0.1} className="surface rounded-card">
           {FAQ.map((f, i) => {
             const isOpen = i === open;
             return (

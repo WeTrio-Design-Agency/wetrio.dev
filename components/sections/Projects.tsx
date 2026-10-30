@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowUpRight, Spark } from "../Icons";
+import { ArrowUpRight } from "../Icons";
 import { Reveal } from "../Reveal";
 
 type Project = {
@@ -84,13 +84,7 @@ export function Projects() {
     <section id="projects" className="wrap scroll-mt-20 py-20 md:py-32">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
-          <Reveal>
-            <span className="tag">
-              <Spark className="h-3 w-3 text-foreground" />
-              Projects
-            </span>
-          </Reveal>
-          <Reveal as="h2" delay={0.1} className="mt-6 text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
+          <Reveal as="h2" className="text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-6xl">
             Selected work,
             <br />
             <span className="h-dim">all of it live.</span>
