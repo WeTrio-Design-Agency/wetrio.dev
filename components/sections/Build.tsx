@@ -46,7 +46,7 @@ const WORK = [
   {
     name: "MVPs and prototypes",
     title: "For founders who need proof before a bigger build.",
-    text: "A clickable prototype in 1–2 weeks, then a first version you can put in front of investors and first users.",
+    text: "A live demo in one week, then a first version you can put in front of investors and first users.",
     checks: ["Clickable on its own URL", "Real content, not placeholders", "Grows into the product instead of being thrown away"],
   },
 ];

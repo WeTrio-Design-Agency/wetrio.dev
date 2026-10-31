@@ -2,7 +2,7 @@
 export const FAQ = [
   {
     q: "How soon do we see something working?",
-    a: "In one to two weeks. The clickable prototype lives on its own URL, so you review the real thing in a browser, not a slide.",
+    a: "In one week: a live demo of your product on its own link, so you review the real thing in a browser, not a slide.",
   },
   {
     q: "What does it cost to start?",

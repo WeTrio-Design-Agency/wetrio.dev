@@ -9,7 +9,7 @@ const STEPS = [
   },
   {
     title: "Design and prototype",
-    text: "Architecture and interface take shape together. In one to two weeks you click a working prototype on its own URL.",
+    text: "Architecture and interface take shape together. In one week you open a live demo on its own link.",
   },
   {
     title: "Build and iterate",

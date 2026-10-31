@@ -7,7 +7,7 @@ const FORMATS = [
     name: "Discovery sprint",
     terms: "1–2 weeks · fixed price",
     title: "For an idea or a product that needs a plan.",
-    checks: ["Scope and architecture", "A clickable prototype on its own URL", "An estimate for the first version"],
+    checks: ["Scope and architecture", "A live demo on its own link", "An estimate for the first version"],
   },
   {
     name: "First version",

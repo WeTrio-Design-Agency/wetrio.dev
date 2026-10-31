@@ -12,7 +12,7 @@ import { HubWindow } from "../mocks/HubWindow";
 const FACTS = [
   { value: "40+", label: "products shipped" },
   { value: "9+", label: "years of experience" },
-  { value: "1–2 weeks", label: "to a clickable prototype" },
+  { value: "1 week", label: "to a live demo" },
 ];
 
 export function Hero() {
