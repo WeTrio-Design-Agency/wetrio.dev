@@ -1,6 +1,8 @@
 import { Logo } from "../Logo";
 import { CookieSettingsLink } from "../CookieBanner";
+import { BEHANCE_URL, CONTACT_EMAIL, TELEGRAM_URL, WHATSAPP_URL } from "@/lib/site";
 
+/* Three columns as on wetr.io's footer (Kirill, 31.10): ours, the studio, the contacts. Legal moved to the bottom line. */
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "WeTrio Dev",
@@ -14,19 +16,27 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Studio",
     links: [
-      { label: "wetr.io", href: "https://wetr.io" },
+      { label: "WeTrio studio", href: "https://wetr.io" },
+      { label: "About", href: "https://wetr.io/#about" },
       { label: "Cases", href: "https://wetr.io/projects" },
       { label: "Journal", href: "https://wetr.io/journal" },
       { label: "Careers", href: "https://wetr.io/careers" },
     ],
   },
   {
-    title: "Legal",
+    title: "Contact",
     links: [
-      { label: "Privacy", href: "https://wetr.io/privacy" },
-      { label: "Terms", href: "https://wetr.io/terms" },
+      { label: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
+      { label: "Telegram", href: TELEGRAM_URL },
+      { label: "WhatsApp", href: WHATSAPP_URL },
+      { label: "Behance", href: BEHANCE_URL },
     ],
   },
+];
+
+const LEGAL = [
+  { label: "Privacy", href: "https://wetr.io/privacy" },
+  { label: "Terms", href: "https://wetr.io/terms" },
 ];
 
 const external = (href: string) => (href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {});
@@ -69,7 +79,12 @@ export function Footer() {
       </div>
       <div className="wrap flex flex-col gap-3 border-t border-white/[0.08] py-6 text-xs text-muted md:flex-row md:items-center md:justify-between">
         <p>© {new Date().getFullYear()} WeTrio. All rights reserved.</p>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          {LEGAL.map((l) => (
+            <a key={l.label} href={l.href} {...external(l.href)} className="transition-colors hover:text-foreground">
+              {l.label}
+            </a>
+          ))}
           <CookieSettingsLink />
           <p>wetrio.dev · WeTrio Dev</p>
         </div>
