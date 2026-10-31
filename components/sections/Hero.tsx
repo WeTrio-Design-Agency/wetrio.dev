@@ -38,8 +38,7 @@ export function Hero() {
             <span className="h-dim whitespace-nowrap">by one team.</span>
           </Reveal>
           <Reveal as="p" delay={0.2} className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-            For founders and B2B teams. Product design and engineering under one roof, so nothing gets lost between
-            designer and developer.
+            Product design and engineering under one roof, so nothing gets lost between designer and developer.
           </Reveal>
           <Reveal delay={0.3} className="mt-10 flex flex-wrap items-center gap-3">
             <a href="#contact" className="btn btn-primary">

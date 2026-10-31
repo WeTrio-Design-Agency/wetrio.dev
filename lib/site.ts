@@ -5,7 +5,7 @@ export const SITE_NAME = "WeTrio Dev";
 export const SHORT_NAME = "wetrio.dev";
 export const TITLE = "WeTrio Dev: SaaS and web apps, designed and built by one team";
 export const DESCRIPTION =
-  "For founders and B2B teams. Product design and engineering under one roof, so nothing gets lost between designer and developer. A live demo of your product in one week.";
+  "Product design and engineering under one roof, so nothing gets lost between designer and developer. A live demo of your product in one week.";
 export const OG_IMAGE = "/og.jpg";
 
 export const STUDIO_ORIGIN = "https://wetr.io";
