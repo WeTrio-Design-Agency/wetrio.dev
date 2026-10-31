@@ -36,9 +36,9 @@ export default async function Home() {
       <Proof />
       {/* what you get → proof → what we can do for you → how and how much → who → questions → the form (audit, 31.10) */}
       <Products />
-      <Versus />
       <Build />
       <Projects />
+      <Versus />
       <Process />
       <Engage />
       <Stack />
