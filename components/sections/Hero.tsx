@@ -10,7 +10,7 @@ import { HubWindow } from "../mocks/HubWindow";
  */
 /* Kirill's numbers (31.10), above the headline. Years are the team's experience: the studio itself dates from 2024. */
 const FACTS = [
-  { value: "20+", label: "products shipped" },
+  { value: "40+", label: "products shipped" },
   { value: "9+", label: "years of experience" },
   { value: "1–2 weeks", label: "to a clickable prototype" },
 ];

@@ -9,7 +9,7 @@ export function GET() {
     `> ${DESCRIPTION} Geographic reach: worldwide (a team across several countries).`,
     "",
     "## Facts",
-    "- 20+ products shipped; 9+ years building digital products; a clickable prototype in 1–2 weeks.",
+    "- 40+ products shipped; 9+ years building digital products; a clickable prototype in 1–2 weeks.",
     "",
     "## What we build",
     "- SaaS platforms: sign-up, plans and Stripe billing, roles and an admin the team runs without a developer.",
