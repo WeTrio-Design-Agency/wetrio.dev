@@ -11,13 +11,13 @@ export function Contact() {
         <div className="relative grid grid-cols-1 gap-10 p-6 md:p-12 lg:grid-cols-2 lg:gap-16 lg:p-16">
           <div className="flex flex-col">
             <h2 className="text-[2.125rem] font-medium leading-[1.06] tracking-[-0.03em] md:text-[3.25rem] lg:text-[clamp(2.25rem,3.3vw,3.5rem)]">
-              Let&apos;s build the
+              Get a free audit
               <br />
-              first version.
+              of your product.
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-white/80 md:text-lg">
-              Tell us about your product. We reply with what the smallest version worth building looks like and when
-              you can click it.
+              Tell us about your product. We reply within one business day, and after a short call you get the audit:
+              what to build first, what it takes and when you can click it.
             </p>
             <div className="mt-auto pt-10">
               <p className="text-sm text-white/70">Prefer a quick message?</p>

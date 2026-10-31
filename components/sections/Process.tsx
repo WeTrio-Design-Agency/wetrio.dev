@@ -9,7 +9,7 @@ const STEPS = [
   },
   {
     title: "Design and prototype",
-    text: "Architecture and interface take shape together. Within weeks you click a working prototype on its own URL.",
+    text: "Architecture and interface take shape together. In one to two weeks you click a working prototype on its own URL.",
   },
   {
     title: "Build and iterate",
@@ -30,7 +30,7 @@ const PRINCIPLES: { title: string; text: string; icon: GlyphName }[] = [
   },
   {
     title: "Design is part of the build",
-    text: "The Lab shares one design language with the studio. Speed never excuses a careless interface.",
+    text: "We share one design language with the studio. Speed never excuses a careless interface.",
     icon: "layers",
   },
   {
@@ -61,7 +61,7 @@ export function Process() {
           </Reveal>
         </div>
         <Reveal as="p" delay={0.15} className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-          Short loops, live software, no hidden phases. The Lab is run by{" "}
+          Short loops, live software, no hidden phases. WeTrio Dev is part of{" "}
           <a href="https://wetr.io" target="_blank" rel="noopener noreferrer" className="text-foreground underline decoration-white/30 underline-offset-4 hover:decoration-accent">
             WeTrio
           </a>

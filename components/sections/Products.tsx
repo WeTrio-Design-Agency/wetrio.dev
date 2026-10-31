@@ -55,7 +55,7 @@ export function Products() {
         </div>
         <Reveal as="p" delay={0.15} className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
           Three products we run every day: a SaaS with paying customers, the platform the studio works in and the
-          studio site. Same team, same stack we offer you.
+          studio site.
         </Reveal>
       </div>
 

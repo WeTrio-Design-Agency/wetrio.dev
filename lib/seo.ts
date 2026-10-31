@@ -5,7 +5,7 @@ const WEBSITE_ID = `${SITE_ORIGIN}/#website`;
 
 /**
  * Organization, not ProfessionalService (that is a LocalBusiness and expects an address and opening hours we do not
- * publish). The Lab is a child of the studio: `parentOrganization` points at wetr.io's own Organization node.
+ * publish). WeTrio Dev is a child of the studio: `parentOrganization` points at wetr.io's own Organization node.
  */
 export function organizationJsonLd() {
   return {

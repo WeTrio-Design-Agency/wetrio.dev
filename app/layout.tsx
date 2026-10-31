@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     url: `${SITE_ORIGIN}/`,
     siteName: SITE_NAME,
     locale: "en_US",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "WeTrio Development Lab: architecture, design, engineering and launch by one team" }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "WeTrio Dev: SaaS and web apps, designed and built by one team" }],
   },
   twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: [OG_IMAGE] },
   robots: { index: true, follow: true },

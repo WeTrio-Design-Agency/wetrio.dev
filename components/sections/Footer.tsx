@@ -3,9 +3,10 @@ import { CookieSettingsLink } from "../CookieBanner";
 
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
-    title: "Lab",
+    title: "WeTrio Dev",
     links: [
       { label: "Products", href: "#products" },
+      { label: "Services", href: "#services" },
       { label: "Projects", href: "#projects" },
       { label: "Process", href: "#process" },
     ],
@@ -37,12 +38,12 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Software products by WeTrio, a B2B design studio. Architecture, design, engineering and launch by one team.
+            SaaS and web apps by WeTrio, a B2B design studio. Product design and engineering under one roof.
           </p>
           {/* the hero's two buttons (Kirill, 30.10) */}
           <div className="mt-6 flex flex-wrap gap-3">
             <a href="#contact" className="btn btn-primary">
-              Start a project
+              Get a free audit
             </a>
             <a href="#products" className="btn btn-secondary">
               See the products
@@ -70,7 +71,7 @@ export function Footer() {
         <p>© {new Date().getFullYear()} WeTrio. All rights reserved.</p>
         <div className="flex items-center gap-4">
           <CookieSettingsLink />
-          <p>wetrio.dev · WeTrio Development Lab</p>
+          <p>wetrio.dev · WeTrio Dev</p>
         </div>
       </div>
     </footer>

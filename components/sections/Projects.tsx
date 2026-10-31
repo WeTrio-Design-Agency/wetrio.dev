@@ -11,7 +11,7 @@ type Project = {
   by: "lab" | "studio";
 };
 
-/* The Lab's own front-end builds on their subdomains, and websites the studio designed (public cases on wetr.io). */
+/* Our own front-end builds on their subdomains, and websites the studio designed (public cases on wetr.io). */
 const PROJECTS: Project[] = [
   {
     title: "Nordhaus",
@@ -92,7 +92,7 @@ export function Projects() {
         </div>
         <Reveal delay={0.15} className="flex flex-col items-start gap-5">
           <p className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-            Front-end builds by the Lab alongside websites designed by the studio.
+            Front-end builds by our engineers alongside websites designed by the studio.
           </p>
           <a href="https://wetr.io/projects" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
             All studio cases
@@ -120,7 +120,7 @@ export function Projects() {
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-lg font-medium">{p.title}</span>
                   <span className={`shrink-0 text-xs ${p.by === "lab" ? "text-accent" : "text-muted"}`}>
-                    {p.by === "lab" ? "Built by the Lab" : "Designed by the studio"}
+                    {p.by === "lab" ? "Built by WeTrio Dev" : "Designed by the studio"}
                   </span>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.text}</p>

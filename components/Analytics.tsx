@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { captureAttribution } from "@/lib/attribution";
 import { GTM_ID, analyticsHostAllowed } from "@/lib/site";
 
 let injected = false;
@@ -12,6 +13,8 @@ let injected = false;
  */
 export function Analytics() {
   useEffect(() => {
+    // outside the consent and host gates on purpose: the campaign record is functionality storage, as on wetr.io
+    captureAttribution();
     if (injected || !GTM_ID || !analyticsHostAllowed()) return;
     injected = true;
     window.dataLayer = window.dataLayer || [];

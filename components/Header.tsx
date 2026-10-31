@@ -6,6 +6,7 @@ import { trackEvent } from "@/lib/analytics/track";
 
 const LINKS = [
   { href: "#products", label: "Products" },
+  { href: "#services", label: "Services" },
   { href: "#projects", label: "Projects" },
   { href: "#process", label: "Process" },
   { href: "#faq", label: "FAQ" },
@@ -42,7 +43,7 @@ export function Header() {
       }`}
     >
       <div className="wrap flex h-20 items-center">
-        <a href="#top" className="z-10 flex items-center" aria-label="WeTrio Dev Lab, home">
+        <a href="#top" className="z-10 flex items-center" aria-label="WeTrio Dev, home">
           <Logo />
         </a>
 
@@ -59,7 +60,7 @@ export function Header() {
         </div>
 
         <a href="#contact" onClick={() => trackEvent("cta_click", { place: "nav" })} className="btn btn-primary ml-auto mr-3 lg:mr-0">
-          Start a project
+          Get a free audit
         </a>
 
         <button

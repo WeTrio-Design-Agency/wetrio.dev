@@ -5,42 +5,49 @@ import { Glyph, type GlyphName } from "../Icons";
 import { Reveal } from "../Reveal";
 import { Checks } from "../mocks/Windows";
 
+/* Each kind of work says who it is for, what you get and how soon (Kirill's audit, 31.10). */
 const WORK = [
   {
     name: "SaaS platforms",
-    title: "Multi-tenant products for subscription businesses.",
-    text: "Auth, billing, roles, admin and usage limits: everything a subscription product needs on day one.",
-    checks: ["Stripe subscriptions and invoices", "Roles and workspaces", "Admin and moderation tools", "Usage limits and abuse control"],
+    title: "For founders turning a service into a subscription product.",
+    text: "Sign-up, plans and billing, roles, and an admin your team runs without a developer.",
+    checks: ["Stripe subscriptions and invoices", "Workspaces and roles", "Admin, moderation and usage limits"],
   },
   {
     name: "Web applications and portals",
-    title: "Client portals, marketplaces and business-critical apps.",
-    text: "Fast on a phone by default, usable from the keyboard, readable by a screen reader.",
-    checks: ["Search, filters and tables that survive a reload", "Sign-in by magic link or password", "Files, invoices and exports"],
+    title: "For companies whose clients or partners need their own login.",
+    text: "Client portals, marketplaces and booking flows that work on a phone first.",
+    checks: ["Sign-in by magic link or password", "Files, invoices and exports", "Usable from the keyboard and a screen reader"],
+  },
+  {
+    name: "Mobile apps",
+    title: "For products people reach for on the go.",
+    text: "iOS and Android apps that share one backend with your web product, so both stay in step.",
+    checks: ["iOS and Android", "One backend for web and mobile", "Push notifications"],
   },
   {
     name: "Dashboards and internal tools",
-    title: "Operations tools that turn scattered data into decisions.",
-    text: "One place for the numbers a team acts on, with access by role.",
-    checks: ["Charts readable in both themes", "Role-based access", "Digests to mail and Telegram"],
+    title: "For teams running operations from spreadsheets.",
+    text: "One place for the numbers and tasks a team acts on, with access by role.",
+    checks: ["Live data from the systems you already run", "Role-based access", "Digests to mail and Telegram"],
   },
   {
     name: "AI features and automation",
-    title: "Assistants, summarisers and classifiers inside real workflows.",
-    text: "Built into the tools a team already uses and measured by the hours it saves.",
+    title: "For teams losing hours to repeatable work.",
+    text: "Assistants, summaries and document checks inside the tools you already use, measured by the hours they save.",
     checks: ["Claude and OpenAI models", "Call transcripts and summaries", "Document rendering and checks"],
   },
   {
     name: "Integrations and APIs",
-    title: "APIs, webhooks and automations that connect the tools you already run.",
-    text: "Your product talks to billing, mail, chat and the data warehouse without manual steps.",
+    title: "For products that have to talk to other tools.",
+    text: "Billing, mail, chat and your data warehouse connected without manual steps.",
     checks: ["Stripe, Supabase, Telegram, Deepgram", "A public API with keys", "Webhooks with retries"],
   },
   {
     name: "MVPs and prototypes",
-    title: "A working first version in weeks.",
-    text: "Something you can put in front of investors and first users on a real URL.",
-    checks: ["Clickable on its own subdomain", "Real content, not placeholders", "Ready to grow into the product"],
+    title: "For founders who need proof before a bigger build.",
+    text: "A clickable prototype in 1–2 weeks, then a first version you can put in front of investors and first users.",
+    checks: ["Clickable on its own URL", "Real content, not placeholders", "Grows into the product instead of being thrown away"],
   },
 ];
 
@@ -158,21 +165,22 @@ export function Build() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="build" className="wrap scroll-mt-20 py-24 md:py-40 lg:py-48">
+    <section id="services" className="wrap scroll-mt-20 py-24 md:py-40 lg:py-48">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <Reveal as="h2" className="text-[2.125rem] font-medium leading-[1.06] tracking-[-0.03em] md:text-[3.25rem] lg:text-[clamp(2.25rem,3.3vw,3.5rem)]">
-            Six kinds of work,
+            What we build,
             <br />
-            <span className="h-dim">one way of working.</span>
+            <span className="h-dim">at any stage.</span>
           </Reveal>
         </div>
         <Reveal delay={0.15} className="flex flex-col items-start gap-5">
           <p className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-            Every engagement starts with a scoped first sprint and ends on a live URL.
+            An idea, a half-built MVP or a live product someone else started: we join where you are, take over the
+            code if there is any, and keep it shipping.
           </p>
           <a href="#contact" className="btn btn-primary">
-            Start a project
+            Get a free audit
           </a>
         </Reveal>
       </div>
