@@ -8,8 +8,8 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
     title: "WeTrio Dev",
     links: [
       { label: "Products", href: "#products" },
-      { label: "Services", href: "#services" },
       { label: "Projects", href: "#projects" },
+      { label: "Services", href: "#services" },
       { label: "Process", href: "#process" },
     ],
   },

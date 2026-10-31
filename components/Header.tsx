@@ -6,8 +6,8 @@ import { trackEvent } from "@/lib/analytics/track";
 
 const LINKS = [
   { href: "#products", label: "Products" },
-  { href: "#services", label: "Services" },
   { href: "#projects", label: "Projects" },
+  { href: "#services", label: "Services" },
   { href: "#process", label: "Process" },
   { href: "#faq", label: "FAQ" },
 ];
