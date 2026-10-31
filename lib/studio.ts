@@ -21,48 +21,34 @@ const TEAM_FALLBACK: Member[] = [
   { name: "Daria", role: "Project Manager", image: "/team/daria.webp" },
 ];
 
-/* The homepage set on wetr.io: active and not tied to a service. */
+/* The set wetr.io/web-design shows (Kirill, 31.10): active, service `webdesign`, closest to what this site sells. */
 const TESTIMONIALS_FALLBACK: Testimonial[] = [
   {
-    text: "Amazing work, communication and creativity as always. They did a great job understanding our needs and turning our existing materials into a killer presentation set.",
-    author: "Camille D.",
-    position: "Data Product Manager",
-    company: "Louis Vuitton",
+    text: "The website became much easier to understand. The team helped us turn a complex offer into a clear user journey with strong visual direction.",
+    author: "Leila H.",
+    position: "Product Lead",
+    company: "Yuwab",
     rating: 5,
   },
   {
-    text: "Wow, truly exceeded my expectations. That was money well spent. Definitely recommending and will use again for future projects.",
-    author: "Mark S.",
-    position: "VP of Marketing",
-    company: "HSBC",
+    text: "The new web design gave our product a much stronger digital presence. It feels cleaner, more premium, and easier for customers to navigate.",
+    author: "Elena S.",
+    position: "Brand Manager",
+    company: "Sensin",
     rating: 5,
   },
   {
-    text: "I can't say enough about the level of execution from this agency. I've used them multiple times, and each time it gets better! Fantastic! I recommend their services to everyone.",
-    author: "Kenneth M.",
-    position: "CEO",
-    company: "Monfort Companies",
+    text: "The landing page structure became sharper and more focused. It was clear that the design was built around how users actually make decisions.",
+    author: "Alex P.",
+    position: "Growth Lead",
+    company: "Snappymob",
     rating: 5,
   },
   {
-    text: "This is our third time working with this agency and we always appreciate their quick turnaround and quality of work! We will definitely work with them again!",
-    author: "Amy B.",
-    position: "Managing Partner",
-    company: "DA Ventures",
-    rating: 5,
-  },
-  {
-    text: "Thank you for your quick turnaround! The presentation you created for us matched our brand perfectly, and the design was excellent. Our team was very pleased with the quality of work. We highly recommend your services!",
-    author: "Kari U.",
-    position: "Founder",
-    company: "Range Meat Academy",
-    rating: 5,
-  },
-  {
-    text: "Amazing work, communication and creativity as always. WOW! This is my 2nd work with this agency and will be more. They did a great job, understanding our needs and turning our existing PPT into a killer pitch set. Thanks!",
-    author: "Aswad K.",
-    position: "Founder",
-    company: "Frontplay Headwear",
+    text: "The interface direction helped us communicate the product more clearly. The team balanced visual quality with real usability.",
+    author: "Tomas V.",
+    position: "Product Manager",
+    company: "Invideos",
     rating: 5,
   },
 ];
@@ -102,7 +88,7 @@ type TestimonialRow = {
 
 export async function loadTestimonials(): Promise<Testimonial[]> {
   const rows = await rest<TestimonialRow[]>(
-    "testimonials?select=text,author_name,author_surname_initial,author_role,company,rating&active=eq.true&service_id=is.null&order=sort_order.asc",
+    "testimonials?select=text,author_name,author_surname_initial,author_role,company,rating&active=eq.true&service_id=eq.webdesign&order=sort_order.asc",
   );
   const list = (rows ?? [])
     .filter((r) => r.text && r.author_name)

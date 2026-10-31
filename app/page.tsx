@@ -10,6 +10,7 @@ import { Products } from "@/components/sections/Products";
 import { Projects } from "@/components/sections/Projects";
 import { Proof } from "@/components/sections/Proof";
 import { Stack } from "@/components/sections/Stack";
+import { Versus } from "@/components/sections/Versus";
 import { Team } from "@/components/sections/Team";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/lib/faq";
@@ -35,6 +36,7 @@ export default async function Home() {
       <Proof />
       {/* what you get → proof → what we can do for you → how and how much → who → questions → the form (audit, 31.10) */}
       <Products />
+      <Versus />
       <Build />
       <Projects />
       <Process />
