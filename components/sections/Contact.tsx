@@ -16,8 +16,8 @@ export function Contact() {
               of your product.
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-white/80 md:text-lg">
-              Tell us about your product. We reply within one business day, and after a short call you get the audit:
-              what to build first, what it takes and when you can click it.
+              Tell us about your product. We reply within one business day. Get the audit: what to build first, what it
+              takes and when you can click it.
             </p>
             <div className="mt-auto pt-10">
               <p className="text-sm text-white/70">Prefer a quick message?</p>
