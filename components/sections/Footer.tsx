@@ -86,7 +86,6 @@ export function Footer() {
             </a>
           ))}
           <CookieSettingsLink />
-          <p>wetrio.dev · WeTrio Dev</p>
         </div>
       </div>
     </footer>
