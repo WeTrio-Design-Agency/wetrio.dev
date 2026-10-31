@@ -4,6 +4,9 @@
  *
  * Without STUDIO_SUPABASE_URL and STUDIO_SUPABASE_ANON_KEY, or when the read fails, the page shows the snapshot
  * below (taken 31.10.2026), so the section never comes up empty.
+ *
+ * The cookie banner and the trackers come from the same place (Kirill, 31.10: «куки один в один как на витрио»): the
+ * banner's words from the admin's Global elements, the GTM container and the Meta Pixel from its Site settings.
  */
 
 export type Member = { name: string; role: string; image: string };
@@ -111,4 +114,36 @@ export async function loadTestimonials(): Promise<Testimonial[]> {
       rating: r.rating ?? 5,
     }));
   return list.length ? list : TESTIMONIALS_FALLBACK;
+}
+
+export type CookieCopy = { body: string; policyLabel: string; acceptAll: string; essentialOnly: string };
+
+/* wetr.io's own fallbacks (src/components/CookieBanner.tsx there), used while the admin leaves a field empty. */
+const COOKIE_FALLBACK: CookieCopy = {
+  body: "We use cookies to improve your experience. Accept all or essential cookies only. Learn more in our",
+  policyLabel: "Privacy Policy",
+  acceptAll: "Accept all",
+  essentialOnly: "Essential only",
+};
+
+export async function loadCookieCopy(): Promise<CookieCopy> {
+  const rows = await rest<{ content?: { cookie?: Partial<CookieCopy> } }[]>(
+    "pages?id=eq.global&status=eq.published&select=content",
+  );
+  const c = rows?.[0]?.content?.cookie ?? {};
+  const pick = (k: keyof CookieCopy) => (typeof c[k] === "string" && c[k]!.trim() ? c[k]!.trim() : COOKIE_FALLBACK[k]);
+  return { body: pick("body"), policyLabel: pick("policyLabel"), acceptAll: pick("acceptAll"), essentialOnly: pick("essentialOnly") };
+}
+
+export type Trackers = { gtmId: string; metaPixelId: string };
+
+/** The studio's GTM container and Meta Pixel; NEXT_PUBLIC_GTM_ID / NEXT_PUBLIC_META_PIXEL_ID override them for this site. */
+export async function loadTrackers(): Promise<Trackers> {
+  const rows = await rest<{ gtm_id: string | null; meta_pixel_id: string | null }[]>(
+    "site_settings?select=gtm_id,meta_pixel_id&limit=1",
+  );
+  return {
+    gtmId: process.env.NEXT_PUBLIC_GTM_ID?.trim() || rows?.[0]?.gtm_id?.trim() || "",
+    metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() || rows?.[0]?.meta_pixel_id?.trim() || "",
+  };
 }

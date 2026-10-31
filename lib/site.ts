@@ -27,12 +27,6 @@ export const SUBMIT_URL = process.env.NEXT_PUBLIC_SUBMIT_URL?.trim() || "https:/
 /** wetr.io's Cloudflare Turnstile widget; wetrio.dev has to be on its hostname list or every send fails. */
 export const TURNSTILE_SITE_KEY = "0x4AAAAAADlXIg-NGqkeKitk";
 
-/**
- * The GTM container, set in Coolify as NEXT_PUBLIC_GTM_ID. Blank means no analytics at all: the container is
- * never injected and the consent script does nothing. GA4 and Clarity are tags inside the container, as on wetr.io.
- */
-export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID?.trim() ?? "";
-
 /** Live hosts only: a build on localhost or a preview must not file its pageviews in the real property. */
 export const ANALYTICS_HOSTS = ["wetrio.dev", "www.wetrio.dev"];
 

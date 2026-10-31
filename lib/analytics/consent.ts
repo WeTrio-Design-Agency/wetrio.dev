@@ -4,7 +4,7 @@
  * a consent rate and modelled conversions in the reports.
  */
 
-import { ANALYTICS_HOSTS, GTM_ID } from "@/lib/site";
+import { ANALYTICS_HOSTS } from "@/lib/site";
 
 export const CONSENT_KEY = "cookie-consent";
 export type Consent = "all" | "essential";
@@ -39,8 +39,9 @@ declare global {
  * so a visitor who answers the banner at once is still measured correctly. Off the live hosts, or without a
  * container id, it does nothing.
  */
-export const GOOGLE_CONSENT_DEFAULT_SCRIPT = GTM_ID
-  ? `
+export function consentDefaultScript(gtmId: string): string {
+  if (!gtmId) return "";
+  return `
 (function(){
 if(${JSON.stringify(ANALYTICS_HOSTS)}.indexOf(location.hostname)===-1)return;
 window.dataLayer=window.dataLayer||[];
@@ -50,8 +51,8 @@ gtag('set','url_passthrough',true);
 gtag('set','ads_data_redaction',true);
 try{if(localStorage.getItem('${CONSENT_KEY}')==='all'){gtag('consent','update',${JSON.stringify(GRANTED)})}}catch(e){}
 })();
-`.trim()
-  : "";
+`.trim();
+}
 
 export function readConsent(): Consent | null {
   try {

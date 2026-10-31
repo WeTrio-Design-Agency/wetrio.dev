@@ -2,8 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Analytics } from "@/components/Analytics";
 import { CookieBanner } from "@/components/CookieBanner";
-import { GOOGLE_CONSENT_DEFAULT_SCRIPT } from "@/lib/analytics/consent";
+import { consentDefaultScript } from "@/lib/analytics/consent";
 import { DESCRIPTION, OG_IMAGE, SITE_NAME, SITE_ORIGIN, TITLE } from "@/lib/site";
+import { loadCookieCopy, loadTrackers } from "@/lib/studio";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,17 +32,19 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: "#050609" };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const [trackers, cookieCopy] = await Promise.all([loadTrackers(), loadCookieCopy()]);
+  const consentScript = consentDefaultScript(trackers.gtmId);
   return (
     <html lang="en" className={inter.variable}>
       <head>
         {/* Consent Mode defaults, inline and first, so no tag fires in a state nobody declared. */}
-        {GOOGLE_CONSENT_DEFAULT_SCRIPT ? <script dangerouslySetInnerHTML={{ __html: GOOGLE_CONSENT_DEFAULT_SCRIPT }} /> : null}
+        {consentScript ? <script dangerouslySetInnerHTML={{ __html: consentScript }} /> : null}
       </head>
       <body>
         {children}
-        <Analytics />
-        <CookieBanner />
+        <Analytics gtmId={trackers.gtmId} metaPixelId={trackers.metaPixelId} />
+        <CookieBanner copy={cookieCopy} />
       </body>
     </html>
   );
