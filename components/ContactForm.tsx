@@ -187,7 +187,7 @@ export function ContactForm({ copy }: { copy: Content["contact"]["form"] }) {
       )}
 
       <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-2">
-        <button type="submit" disabled={disabled} className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-60">
+        <button type="submit" disabled={disabled} className="btn btn-primary">
           {state === "submitting" ? copy.sending : copy.button}
         </button>
         {!token && !tokenFailed && state === "idle" && <span className="text-sm text-white/60">{copy.checking}</span>}
