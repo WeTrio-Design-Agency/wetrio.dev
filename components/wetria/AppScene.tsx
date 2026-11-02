@@ -355,9 +355,10 @@ export function AppScene({ onPhase }: { onPhase?: (p: ScenePhase) => void }) {
                       transition={{ duration: 0.3, ease }}
                       animate={{ scale: t >= AT_START && t < AT_START + 160 ? 0.94 : 1 }}
                       className={cn(
-                        "inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-full bg-[#3b82f6] text-white",
+                        "inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-full transition-colors",
                         labelled ? "px-4 text-sm font-medium" : "w-10",
-                        !typed && "opacity-40",
+                        // grey until there is something to send, as wetria's own disabled buttons (02.11)
+                        typed ? "bg-[#3b82f6] text-white" : "bg-[#f1f5f9] text-[#5d6b7d]",
                       )}
                     >
                       {labelled && <span>Start</span>}
@@ -509,7 +510,7 @@ export function AppScene({ onPhase }: { onPhase?: (p: ScenePhase) => void }) {
                     <span className="ml-auto inline-flex size-10 items-center justify-center text-[#475569]">
                       <Mic className="size-4" />
                     </span>
-                    <span className="inline-flex size-10 items-center justify-center rounded-full bg-[#3b82f6] text-white opacity-40">
+                    <span className="inline-flex size-10 items-center justify-center rounded-full bg-[#f1f5f9] text-[#5d6b7d]">
                       <ArrowUp className="size-4" />
                     </span>
                   </div>
