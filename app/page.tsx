@@ -13,7 +13,7 @@ import { Stack } from "@/components/sections/Stack";
 import { Versus } from "@/components/sections/Versus";
 import { Team } from "@/components/sections/Team";
 import { Testimonials } from "@/components/sections/Testimonials";
-import { FAQ } from "@/lib/faq";
+import { loadContent, loadSeo } from "@/lib/content";
 import { faqJsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { loadTeam, loadTestimonials } from "@/lib/studio";
 
@@ -22,31 +22,31 @@ function JsonLd({ data }: { data: object }) {
 }
 
 export default async function Home() {
-  const [team, testimonials] = await Promise.all([loadTeam(), loadTestimonials()]);
+  const [copy, seo, team, testimonials] = await Promise.all([loadContent(), loadSeo(), loadTeam(), loadTestimonials()]);
   return (
     <main id="main" className="grain">
       <a href="#products" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:rounded-lg focus:bg-card focus:px-4 focus:py-2 focus:text-sm">
         Skip to content
       </a>
-      <JsonLd data={organizationJsonLd()} />
+      <JsonLd data={organizationJsonLd(seo.description)} />
       <JsonLd data={websiteJsonLd()} />
-      <JsonLd data={faqJsonLd(FAQ)} />
-      <Header />
-      <Hero />
-      <Proof />
+      <JsonLd data={faqJsonLd(copy.faq.items)} />
+      <Header copy={copy.nav} />
+      <Hero copy={copy.hero} />
+      <Proof copy={copy.brands} />
       {/* what you get → proof → what we can do for you → how and how much → who → questions → the form (audit, 31.10) */}
-      <Products />
-      <Projects />
-      <Versus />
-      <Build />
-      <Process />
-      <Engage />
-      <Stack />
-      <Team members={team} />
-      <Testimonials items={testimonials} />
-      <Faq />
-      <Contact />
-      <Footer />
+      <Products copy={copy.products} />
+      <Projects copy={copy.projects} />
+      <Versus copy={copy.versus} />
+      <Build copy={copy.services} />
+      <Process copy={copy.process} />
+      <Engage copy={copy.engage} />
+      <Stack copy={copy.stack} />
+      <Team copy={copy.team} members={team} />
+      <Testimonials copy={copy.testimonials} items={testimonials} />
+      <Faq copy={copy.faq} />
+      <Contact copy={copy.contact} />
+      <Footer copy={copy.footer} nav={copy.nav} />
     </main>
   );
 }

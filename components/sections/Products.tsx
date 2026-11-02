@@ -1,67 +1,44 @@
 "use client";
 
 import { useState } from "react";
+import type { Content } from "@/lib/content";
 import { Fluid } from "../Fluid";
 import { Reveal } from "../Reveal";
 import { Checks, WetriaWindow } from "../mocks/Windows";
 import { Fit } from "../mocks/Fit";
 import { HubWindow } from "../mocks/HubWindow";
 import { SiteWindow } from "../mocks/Shots";
+import { Rich } from "../Rich";
 
-/* Named by what each one is, with the product's name inside (Kirill, 30.10); the studio site goes last. */
-const PRODUCTS: { id: string; name: string; title: string; text: string; checks: string[]; width: number; window: React.ReactNode }[] = [
-  {
-    id: "wetria",
-    name: "AI SaaS platform",
-    title: "wetria: AI slide design on the client's own template.",
-    text: "A SaaS with paying customers: upload a deck, get it back designed and still editable in PowerPoint, Keynote, Google Slides or Figma.",
-    checks: ["Sign-up, plans and promo codes on Stripe", "An AI pipeline with render workers for PPTX and PDF", "Usage limits, abuse control and moderation in the Hub"],
-    width: 1700,
-    window: <WetriaWindow />,
-  },
-  {
-    id: "hub",
-    name: "CRM and operations platform",
-    title: "WeTrio Hub: the platform the studio runs on.",
-    text: "Clients, projects, tasks, timesheets, finance, mail and meetings in one place, with access by role. It replaced ClickUp for the whole team.",
-    checks: ["Role-based access for admins, leads and designers", "Mail, meetings and chat with call transcripts", "A client portal reading the same API"],
-    width: 1440,
-    window: <HubWindow />,
-  },
-  {
-    id: "site",
-    name: "Website and CMS",
-    title: "wetr.io: the studio's site and the admin behind it.",
-    text: "The team edits cases, the journal, FAQ and SEO without a developer. Every enquiry is encrypted.",
-    checks: ["A CMS the team runs without a developer", "Encrypted enquiry intake", "GA4, Clarity and Meta Pixel under cookie consent"],
-    width: 1440,
-    window: <SiteWindow />,
-  },
+/* Named by what each one is, with the product's name inside (Kirill, 30.10); the studio site goes last. The words are
+   the admin's (lib/content.ts), one slot per product; the window stays with its slot. */
+const PRODUCTS: { id: string; width: number; window: React.ReactNode }[] = [
+  { id: "wetria", width: 1700, window: <WetriaWindow /> },
+  { id: "hub", width: 1440, window: <HubWindow /> },
+  { id: "site", width: 1440, window: <SiteWindow /> },
 ];
 
-export function Products() {
+export function Products({ copy }: { copy: Content["products"] }) {
   const [active, setActive] = useState(0);
   const current = PRODUCTS[active];
+  const items = PRODUCTS.map((p, i) => ({ ...p, ...copy.items[i] }));
 
   return (
     <section id="products" className="wrap scroll-mt-20 py-24 md:py-40 lg:py-48">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <Reveal as="h2" className="text-[2.125rem] font-medium leading-[1.06] tracking-[-0.03em] md:text-[3.25rem] lg:text-[clamp(2.25rem,3.3vw,3.5rem)]">
-            Products we build
-            <br />
-            <span className="h-dim">and keep running.</span>
+            <Rich text={copy.heading} />
           </Reveal>
         </div>
         <Reveal as="p" delay={0.15} className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-          Three products we run every day: a SaaS with paying customers, the platform the studio works in and the
-          studio site.
+          {copy.subtitle}
         </Reveal>
       </div>
 
       <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
         <Reveal className="surface rounded-card">
-          {PRODUCTS.map((p, i) => {
+          {items.map((p, i) => {
             const open = i === active;
             return (
               <div key={p.id} className={i > 0 ? "border-t border-white/[0.08]" : ""}>

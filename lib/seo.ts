@@ -1,13 +1,14 @@
-import { CONTACT_EMAIL, DESCRIPTION, OG_IMAGE, SHORT_NAME, SITE_NAME, SITE_ORIGIN, STUDIO_ORG_ID, STUDIO_ORIGIN } from "./site";
+import { CONTACT_EMAIL, OG_IMAGE, SHORT_NAME, SITE_NAME, SITE_ORIGIN, STUDIO_ORG_ID, STUDIO_ORIGIN } from "./site";
 
 const ORG_ID = `${SITE_ORIGIN}/#organization`;
 const WEBSITE_ID = `${SITE_ORIGIN}/#website`;
 
 /**
  * Organization, not ProfessionalService (that is a LocalBusiness and expects an address and opening hours we do not
- * publish). WeTrio Dev is a child of the studio: `parentOrganization` points at wetr.io's own Organization node.
+ * publish). WeTrio Dev is a child of the studio: `parentOrganization` points at wetr.io's own Organization node. The
+ * description is the page's meta description (lib/content.ts), so the two never disagree.
  */
-export function organizationJsonLd() {
+export function organizationJsonLd(description: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -17,7 +18,7 @@ export function organizationJsonLd() {
     url: `${SITE_ORIGIN}/`,
     logo: `${SITE_ORIGIN}/icon.svg`,
     image: `${SITE_ORIGIN}${OG_IMAGE}`,
-    description: DESCRIPTION,
+    description,
     areaServed: "Worldwide",
     parentOrganization: {
       "@type": "Organization",

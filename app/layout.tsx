@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import { Analytics } from "@/components/Analytics";
 import { CookieBanner } from "@/components/CookieBanner";
 import { consentDefaultScript } from "@/lib/analytics/consent";
-import { DESCRIPTION, OG_IMAGE, SITE_NAME, SITE_ORIGIN, TITLE } from "@/lib/site";
+import { loadSeo } from "@/lib/content";
+import { OG_IMAGE, SITE_NAME, SITE_ORIGIN } from "@/lib/site";
 import { loadCookieCopy, loadTrackers } from "@/lib/studio";
 import "./globals.css";
 
@@ -12,23 +13,28 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_ORIGIN),
-  title: { absolute: TITLE },
-  description: DESCRIPTION,
-  alternates: { canonical: `${SITE_ORIGIN}/` },
-  openGraph: {
-    type: "website",
-    title: TITLE,
-    description: DESCRIPTION,
-    url: `${SITE_ORIGIN}/`,
-    siteName: SITE_NAME,
-    locale: "en_US",
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "WeTrio Dev: SaaS and web apps, designed and built by one team" }],
-  },
-  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: [OG_IMAGE] },
-  robots: { index: true, follow: true },
-};
+/** The admin's SEO block for the page (lib/content.ts); left empty, the site's own title, description, card and canonical. */
+export async function generateMetadata(): Promise<Metadata> {
+  const { title, description, canonical, ogImage, noindex } = await loadSeo();
+  const image = ogImage ? { url: ogImage, alt: title } : { url: OG_IMAGE, width: 1200, height: 630, alt: title };
+  return {
+    metadataBase: new URL(SITE_ORIGIN),
+    title: { absolute: title },
+    description,
+    alternates: { canonical: canonical || `${SITE_ORIGIN}/` },
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      url: `${SITE_ORIGIN}/`,
+      siteName: SITE_NAME,
+      locale: "en_US",
+      images: [image],
+    },
+    twitter: { card: "summary_large_image", title, description, images: [image.url] },
+    robots: { index: !noindex, follow: true },
+  };
+}
 
 export const viewport: Viewport = { themeColor: "#050609" };
 

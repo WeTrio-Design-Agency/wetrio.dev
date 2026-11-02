@@ -1,12 +1,17 @@
-/** Site-wide constants. wetrio.dev has no admin of its own: everything that wetr.io reads from site_settings lives here. */
+/** Site-wide constants. wetrio.dev has no settings of its own in the admin: everything that wetr.io reads from site_settings
+ *  lives here. The page's words are the admin's (lib/content.ts). */
 
 export const SITE_ORIGIN = "https://wetrio.dev";
 export const SITE_NAME = "WeTrio Dev";
 export const SHORT_NAME = "wetrio.dev";
+/** The search title and description while the admin's SEO block for the page is empty (lib/content.ts). */
 export const TITLE = "WeTrio Dev: SaaS and web apps, designed and built by one team";
 export const DESCRIPTION =
   "Product design and engineering under one roof, so nothing gets lost between designer and developer. A live demo of your product in one week.";
 export const OG_IMAGE = "/og.jpg";
+
+/** The menu's anchors, in its order; the footer's first column is the first four. Their words are in lib/content.ts. */
+export const NAV_HREFS = ["#products", "#projects", "#services", "#process", "#faq"];
 
 export const STUDIO_ORIGIN = "https://wetr.io";
 /** The studio's Organization node on wetr.io, so the two graphs link as parent and child. */

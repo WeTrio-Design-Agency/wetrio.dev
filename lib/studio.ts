@@ -53,7 +53,8 @@ const TESTIMONIALS_FALLBACK: Testimonial[] = [
   },
 ];
 
-async function rest<T>(path: string): Promise<T | null> {
+/** A public read from the studio's database; null without the keys or when the read fails. lib/content.ts reads the page's words with it. */
+export async function rest<T>(path: string): Promise<T | null> {
   if (!URL || !KEY) return null;
   try {
     const res = await fetch(`${URL}/rest/v1/${path}`, {

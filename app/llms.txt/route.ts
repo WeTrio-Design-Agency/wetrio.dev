@@ -1,12 +1,14 @@
-import { CONTACT_EMAIL, DESCRIPTION, SITE_NAME, SITE_ORIGIN, STUDIO_ORIGIN, TELEGRAM_URL } from "@/lib/site";
-import { FAQ } from "@/lib/faq";
+import { loadContent, loadSeo } from "@/lib/content";
+import { CONTACT_EMAIL, SITE_NAME, SITE_ORIGIN, STUDIO_ORIGIN, TELEGRAM_URL } from "@/lib/site";
 
-/** /llms.txt: the facts an answer engine can quote, every line said on the page too. */
-export function GET() {
+/** /llms.txt: the facts an answer engine can quote, every line said on the page too. The description and the questions
+ *  are the admin's, as on the page (lib/content.ts); the summary between them is written here. */
+export async function GET() {
+  const [copy, seo] = await Promise.all([loadContent(), loadSeo()]);
   const lines = [
     `# ${SITE_NAME}`,
     "",
-    `> ${DESCRIPTION} Geographic reach: worldwide (a team across several countries).`,
+    `> ${seo.description} Geographic reach: worldwide (a team across several countries).`,
     "",
     "## Facts",
     "- 40+ products shipped; 9+ years of experience; a live demo of your product in one week.",
@@ -40,7 +42,7 @@ export function GET() {
     "- Stack: Next.js, React, TypeScript, Tailwind CSS, Supabase, PostgreSQL, Stripe, Cloudflare, Coolify, Docker, Claude API, Playwright.",
     "",
     "## Questions people ask",
-    ...FAQ.map((f) => `- ${f.q} ${f.a}`),
+    ...copy.faq.items.map((f) => `- ${f.q} ${f.a}`),
     "",
     "## Contact",
     `- Website: ${SITE_ORIGIN}/`,

@@ -1,55 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import type { Content } from "@/lib/content";
 import { Glyph, type GlyphName } from "../Icons";
 import { Reveal } from "../Reveal";
 import { Checks } from "../mocks/Windows";
-
-/* Each kind of work says who it is for, what you get and how soon (Kirill's audit, 31.10). */
-const WORK = [
-  {
-    name: "SaaS platforms",
-    title: "For founders turning a service into a subscription product.",
-    text: "Sign-up, plans and billing, roles, and an admin your team runs without a developer.",
-    checks: ["Stripe subscriptions and invoices", "Workspaces and roles", "Admin, moderation and usage limits"],
-  },
-  {
-    name: "Web applications and portals",
-    title: "For companies whose clients or partners need their own login.",
-    text: "Client portals, marketplaces and booking flows that work on a phone first.",
-    checks: ["Sign-in by magic link or password", "Files, invoices and exports", "Usable from the keyboard and a screen reader"],
-  },
-  {
-    name: "Mobile apps",
-    title: "For products people reach for on the go.",
-    text: "iOS and Android apps that share one backend with your web product, so both stay in step.",
-    checks: ["iOS and Android", "One backend for web and mobile", "Push notifications"],
-  },
-  {
-    name: "Dashboards and internal tools",
-    title: "For teams running operations from spreadsheets.",
-    text: "One place for the numbers and tasks a team acts on, with access by role.",
-    checks: ["Live data from the systems you already run", "Role-based access", "Digests to mail and Telegram"],
-  },
-  {
-    name: "AI features and automation",
-    title: "For teams losing hours to repeatable work.",
-    text: "Assistants, summaries and document checks inside the tools you already use, measured by the hours they save.",
-    checks: ["Claude and OpenAI models", "Call transcripts and summaries", "Document rendering and checks"],
-  },
-  {
-    name: "Integrations and APIs",
-    title: "For products that have to talk to other tools.",
-    text: "Billing, mail, chat and your data warehouse connected without manual steps.",
-    checks: ["Stripe, Supabase, Telegram, Deepgram", "A public API with keys", "Webhooks with retries"],
-  },
-  {
-    name: "MVPs and prototypes",
-    title: "For founders who need proof before a bigger build.",
-    text: "A live demo in one week, then a first version you can put in front of investors and first users.",
-    checks: ["Clickable on its own URL", "Real content, not placeholders", "Grows into the product instead of being thrown away"],
-  },
-];
+import { Rich } from "../Rich";
 
 /**
  * The diagram after the reference (Kirill, 30.10): a chip in the middle with a slowly turning ring of dots, six
@@ -161,26 +117,25 @@ function Diagram() {
   );
 }
 
-export function Build() {
+/** The kinds of work are the admin's (lib/content.ts), as many as it has; the diagram beside them is fixed. */
+export function Build({ copy }: { copy: Content["services"] }) {
   const [active, setActive] = useState(0);
+  const WORK = copy.items;
 
   return (
     <section id="services" className="wrap scroll-mt-20 py-24 md:py-40 lg:py-48">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <Reveal as="h2" className="text-[2.125rem] font-medium leading-[1.06] tracking-[-0.03em] md:text-[3.25rem] lg:text-[clamp(2.25rem,3.3vw,3.5rem)]">
-            What we build,
-            <br />
-            <span className="h-dim">at any stage.</span>
+            <Rich text={copy.heading} />
           </Reveal>
         </div>
         <Reveal delay={0.15} className="flex flex-col items-start gap-5">
           <p className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-            An idea, a half-built MVP or a live product someone else started: we join where you are, take over the
-            code if there is any, and keep it shipping.
+            {copy.subtitle}
           </p>
           <a href="#contact" className="btn btn-primary">
-            Get a free audit
+            {copy.button}
           </a>
         </Reveal>
       </div>
@@ -190,7 +145,7 @@ export function Build() {
           {WORK.map((w, i) => {
             const open = i === active;
             return (
-              <div key={w.name} className={i > 0 ? "border-t border-white/[0.08]" : ""}>
+              <div key={i} className={i > 0 ? "border-t border-white/[0.08]" : ""}>
                 <button
                   type="button"
                   onClick={() => setActive(i)}

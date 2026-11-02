@@ -2,22 +2,14 @@
 
 import { useRef, useState } from "react";
 import { attributionField } from "@/lib/attribution";
+import type { Content } from "@/lib/content";
 import { trackEvent } from "@/lib/analytics/track";
 import { CONTACT_EMAIL, SUBMIT_URL } from "@/lib/site";
 import { Select } from "./Select";
 import { Turnstile } from "./Turnstile";
 
-const SERVICES = [
-  { id: "saas", label: "SaaS platform" },
-  { id: "webapp", label: "Web application or portal" },
-  { id: "mobile", label: "Mobile app" },
-  { id: "dashboard", label: "Dashboard or internal tool" },
-  { id: "ai", label: "AI features and automation" },
-  { id: "integration", label: "Integrations and APIs" },
-  { id: "mvp", label: "MVP or prototype" },
-  { id: "existing", label: "A product already in progress" },
-  { id: "other", label: "Something else" },
-];
+/* The options' ids; their labels are the admin's (lib/content.ts), one per slot, and the label is what the intake gets. */
+const SERVICE_IDS = ["saas", "webapp", "mobile", "dashboard", "ai", "integration", "mvp", "existing", "other"];
 
 const field =
   "w-full rounded-lg bg-white/[0.06] px-4 py-2.5 text-base text-foreground placeholder:text-white/40 outline-none ring-1 ring-white/15 transition-shadow focus:ring-2 focus:ring-accent";
@@ -28,9 +20,10 @@ type State = "idle" | "submitting" | "success";
  * Posts to the studio's intake on admin.wetr.io, the way wetr.io's ContactPopup does: multipart, a honeypot, the
  * Turnstile token, the page and the campaign record. From there the lead is the studio's like any other (encrypted
  * row, Telegram, emails, the Hub), filed under the source `dev`. A conversion is counted only once the intake said
- * yes.
+ * yes. The words are the admin's (lib/content.ts); the error lines stay here, they carry the address in lib/site.ts.
  */
-export function ContactForm() {
+export function ContactForm({ copy }: { copy: Content["contact"]["form"] }) {
+  const SERVICES = SERVICE_IDS.map((id, i) => ({ id, label: copy.services[i] }));
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [service, setService] = useState("");
@@ -112,10 +105,8 @@ export function ContactForm() {
   if (state === "success") {
     return (
       <div className="flex flex-col gap-3 py-6" role="status">
-        <p className="text-2xl font-medium tracking-tight">Thanks, {name.trim().split(/\s+/)[0]}.</p>
-        <p className="text-base leading-relaxed text-white/80">
-          Your request is with the team. We reply to {email.trim()} within one business day to book a short call.
-        </p>
+        <p className="text-2xl font-medium tracking-tight">{copy.thanks.replaceAll("{name}", name.trim().split(/\s+/)[0])}</p>
+        <p className="text-base leading-relaxed text-white/80">{copy.received.replaceAll("{email}", email.trim())}</p>
       </div>
     );
   }
@@ -127,7 +118,7 @@ export function ContactForm() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="contact-name" className="mb-1.5 block text-sm text-white/70">
-            Name
+            {copy.nameLabel}
           </label>
           <input
             id="contact-name"
@@ -135,14 +126,14 @@ export function ContactForm() {
             autoComplete="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Your name"
+            placeholder={copy.namePlaceholder}
             aria-invalid={errors.name || undefined}
             className={`${field} ${errors.name ? "ring-red-400" : ""}`}
           />
         </div>
         <div>
           <label htmlFor="contact-email" className="mb-1.5 block text-sm text-white/70">
-            Work email
+            {copy.emailLabel}
           </label>
           <input
             id="contact-email"
@@ -150,7 +141,7 @@ export function ContactForm() {
             autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@company.com"
+            placeholder={copy.emailPlaceholder}
             aria-invalid={errors.email || undefined}
             className={`${field} ${errors.email ? "ring-red-400" : ""}`}
           />
@@ -159,20 +150,20 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="contact-service" className="mb-1.5 block text-sm text-white/70">
-          What are you building?
+          {copy.serviceLabel}
         </label>
-        <Select id="contact-service" value={service} onChange={setService} options={SERVICES} placeholder="Choose one" className={field} />
+        <Select id="contact-service" value={service} onChange={setService} options={SERVICES} placeholder={copy.servicePlaceholder} className={field} />
       </div>
 
       <div>
         <label htmlFor="contact-description" className="mb-1.5 block text-sm text-white/70">
-          About the product
+          {copy.aboutLabel}
         </label>
         <textarea
           id="contact-description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="What it does, who it is for, where it stands today"
+          placeholder={copy.aboutPlaceholder}
           rows={4}
           aria-invalid={errors.description || undefined}
           className={`${field} resize-none ${errors.description ? "ring-red-400" : ""}`}
@@ -197,9 +188,9 @@ export function ContactForm() {
 
       <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-2">
         <button type="submit" disabled={disabled} className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-60">
-          {state === "submitting" ? "Sending…" : "Get my free audit"}
+          {state === "submitting" ? copy.sending : copy.button}
         </button>
-        {!token && !tokenFailed && state === "idle" && <span className="text-sm text-white/60">Checking the connection…</span>}
+        {!token && !tokenFailed && state === "idle" && <span className="text-sm text-white/60">{copy.checking}</span>}
       </div>
     </form>
   );

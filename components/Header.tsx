@@ -3,17 +3,13 @@
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import { trackEvent } from "@/lib/analytics/track";
-
-const LINKS = [
-  { href: "#products", label: "Products" },
-  { href: "#projects", label: "Projects" },
-  { href: "#services", label: "Services" },
-  { href: "#process", label: "Process" },
-  { href: "#faq", label: "FAQ" },
-];
+import type { Content } from "@/lib/content";
+import { NAV_HREFS } from "@/lib/site";
 
 /** The bar: the mark and the links on the left, the white button on the right (Kirill, 30.10). */
-export function Header() {
+export function Header({ copy }: { copy: Content["nav"] }) {
+  // the words come from the admin (lib/content.ts), one per slot; the anchors stay in lib/site.ts
+  const LINKS = NAV_HREFS.map((href, i) => ({ href, label: copy.links[i] }));
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -60,7 +56,7 @@ export function Header() {
         </div>
 
         <a href="#contact" onClick={() => trackEvent("cta_click", { place: "nav" })} className="btn btn-primary ml-auto mr-3 lg:mr-0">
-          Get a free audit
+          {copy.button}
         </a>
 
         <button

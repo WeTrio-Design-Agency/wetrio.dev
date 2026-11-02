@@ -1,24 +1,24 @@
 import Image from "next/image";
+import type { Content } from "@/lib/content";
 import type { Member } from "@/lib/studio";
 import { Reveal } from "../Reveal";
+import { Rich } from "../Rich";
 
 /* Per-photo framing, as on wetr.io: Kate sits higher in her frame than the other two. Keyed by name, as the admin stores it. */
 const FRAMING: Record<string, string> = { Kate: "50% 24%" };
 
 /** The people, as on wetr.io (Kirill, 31.10): portrait cards with the name and role over a dark fade. */
-export function Team({ members }: { members: Member[] }) {
+export function Team({ copy, members }: { copy: Content["team"]; members: Member[] }) {
   return (
     <section id="team" className="wrap scroll-mt-20 py-24 md:py-40 lg:py-48">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <Reveal as="h2" className="text-[2.125rem] font-medium leading-[1.06] tracking-[-0.03em] md:text-[3.25rem] lg:text-[clamp(2.25rem,3.3vw,3.5rem)]">
-            The people behind
-            <br />
-            <span className="h-dim">your product.</span>
+            <Rich text={copy.heading} />
           </Reveal>
         </div>
         <Reveal as="p" delay={0.15} className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-          A small senior team. The people who scope your product stay on it through launch and after.
+          {copy.subtitle}
         </Reveal>
       </div>
 

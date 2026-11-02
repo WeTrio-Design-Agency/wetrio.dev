@@ -1,15 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { Content } from "@/lib/content";
 import type { Testimonial } from "@/lib/studio";
 import { Reveal } from "../Reveal";
+import { Rich } from "../Rich";
 
 /**
  * What clients said, one quote at a time on a card that never changes size, after wetr.io's Testimonials: every
  * quote sits in the same grid cell, all but the active one invisible, so the cell measures the longest and the
  * controls never jump. Advances every 6 seconds, pauses under the pointer, swipes on a phone.
  */
-export function Testimonials({ items }: { items: Testimonial[] }) {
+export function Testimonials({ copy, items }: { copy: Content["testimonials"]; items: Testimonial[] }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchX = useRef<number | null>(null);
@@ -28,13 +30,11 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
         <div>
           <Reveal as="h2" className="text-[2.125rem] font-medium leading-[1.06] tracking-[-0.03em] md:text-[3.25rem] lg:text-[clamp(2.25rem,3.3vw,3.5rem)]">
-            What clients say
-            <br />
-            <span className="h-dim">about working with us.</span>
+            <Rich text={copy.heading} />
           </Reveal>
         </div>
         <Reveal as="p" delay={0.15} className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-          Reviews of WeTrio, the studio behind wetrio.dev.
+          {copy.subtitle}
         </Reveal>
       </div>
 

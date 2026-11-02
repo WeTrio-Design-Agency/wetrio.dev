@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import type { Content } from "@/lib/content";
 import { Minus, Plus } from "../Icons";
 import { Reveal } from "../Reveal";
-import { FAQ } from "@/lib/faq";
+import { Rich } from "../Rich";
 
-export function Faq() {
+export function Faq({ copy }: { copy: Content["faq"] }) {
   const [open, setOpen] = useState(0);
 
   return (
@@ -14,20 +15,18 @@ export function Faq() {
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:items-start lg:gap-16">
         <div>
           <Reveal as="h2" className="text-[2.125rem] font-medium leading-[1.06] tracking-[-0.03em] md:text-[3.25rem] lg:text-[clamp(2.25rem,3.3vw,3.5rem)]">
-            Questions,
-            <br />
-            <span className="h-dim">answered.</span>
+            <Rich text={copy.heading} />
           </Reveal>
           <Reveal as="p" delay={0.15} className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-            Everything people ask before the first call. Not here? Write to us, a person answers.
+            {copy.subtitle}
           </Reveal>
         </div>
 
         <Reveal delay={0.1} className="surface rounded-card">
-          {FAQ.map((f, i) => {
+          {copy.items.map((f, i) => {
             const isOpen = i === open;
             return (
-              <div key={f.q} className={i > 0 ? "border-t border-white/[0.08]" : ""}>
+              <div key={i} className={i > 0 ? "border-t border-white/[0.08]" : ""}>
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? -1 : i)}

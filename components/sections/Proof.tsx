@@ -1,3 +1,4 @@
+import type { Content } from "@/lib/content";
 import { Reveal } from "../Reveal";
 
 /**
@@ -38,7 +39,7 @@ function Mark({ b, mobile }: { b: (typeof BRANDS)[number]; mobile?: boolean }) {
   );
 }
 
-export function Proof() {
+export function Proof({ copy }: { copy: Content["brands"] }) {
   const top = BRANDS.filter((b) => TOP.includes(b.name));
   const bottom = BRANDS.filter((b) => !TOP.includes(b.name));
   return (
@@ -46,7 +47,7 @@ export function Proof() {
       {/* hairlines from edge to edge, the content in the page column (Kirill, 30.10) */}
       <div className="wrap flex flex-col gap-7 py-10 md:py-14 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
         <Reveal as="p" className="text-base text-muted-foreground">
-          Trusted by leading brands
+          {copy.label}
         </Reveal>
 
         {/* a desktop: one row, as on the site */}
