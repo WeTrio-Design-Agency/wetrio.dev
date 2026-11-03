@@ -4,8 +4,9 @@ import type { Member } from "@/lib/studio";
 import { Reveal } from "../Reveal";
 import { Rich } from "../Rich";
 
-/* Per-photo framing, as on wetr.io: Kate sits higher in her frame than the other two. Keyed by name, as the admin stores it. */
-const FRAMING: Record<string, string> = { Kate: "50% 24%" };
+/* Per-photo framing, as on wetr.io: the files are framed eyes-on-one-line, so every card uses the centred crop today.
+   A photo that sits differently gets an objectPosition here. Keyed by name, as the admin stores it. */
+const FRAMING: Record<string, string> = {};
 
 /** The people, as on wetr.io (Kirill, 31.10): portrait cards with the name and role over a dark fade. */
 export function Team({ copy, members }: { copy: Content["team"]; members: Member[] }) {
