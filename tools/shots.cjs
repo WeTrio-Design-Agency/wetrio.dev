@@ -5,7 +5,7 @@
  *   analyzer-result.jpg   a result page, scrolled to the score (RESULT_URL: a result of our own deck)
  *   portal-overview.jpg   the client portal's overview in the light theme (PORTAL_URL: a demo-mode portal)
  *
- *   NODE_PATH=~/Claude/wetrio-web-site/node_modules RESULT_URL=https://wetr.io/analyzer/r/<id> \
+ *   NODE_PATH=~/Claude/code/wetrio-web-site/node_modules RESULT_URL=https://wetr.io/analyzer/r/<id> \
  *   PORTAL_URL=http://localhost:3400 DECK="/path/to/our-deck.pdf" node tools/shots.cjs [site|analyzer|portal]
  */
 const path = require("path");

@@ -1,7 +1,7 @@
 /**
  * Renders public/og.jpg (1200x630): the moving ground from components/Fluid.tsx drawn once, the lock-up, the
  * headline. Run from the repo root with Playwright on NODE_PATH:
- *   NODE_PATH=~/Claude/wetrio-web-site/node_modules node tools/og.cjs
+ *   NODE_PATH=~/Claude/code/wetrio-web-site/node_modules node tools/og.cjs
  */
 const fs = require("fs");
 const path = require("path");
