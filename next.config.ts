@@ -12,12 +12,17 @@ const SUBMIT_ORIGIN = (() => {
   }
 })();
 const STUDIO_MEDIA = "https://krworbvnuciyknhhlzqj.supabase.co";
+// GA4's audience ping (Google Signals) goes to the visitor's own Google domain, www.google.pl from Poland and so on;
+// CSP has no wildcard for a TLD, so the markets that matter are listed.
+const GOOGLE_AUDIENCES = ["com", "pl", "de", "co.uk", "fr", "es", "it", "nl", "be", "ch", "at", "se", "dk", "no", "fi", "ie", "pt", "cz", "ae", "com.sa", "com.tr", "ca", "com.au", "co.in", "com.sg", "us"]
+  .map((tld) => `https://www.google.${tld}`)
+  .join(" ");
 const CSP = [
   `default-src 'self'`,
   `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.google-analytics.com https://www.clarity.ms https://*.clarity.ms https://challenges.cloudflare.com https://connect.facebook.net https://eu-assets.i.posthog.com https://eu.i.posthog.com`,
   `style-src 'self' 'unsafe-inline'`,
-  `connect-src 'self' ${SUBMIT_ORIGIN} https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.clarity.ms https://c.bing.com https://stats.g.doubleclick.net https://www.facebook.com https://eu.i.posthog.com https://eu-assets.i.posthog.com`,
-  `img-src 'self' data: blob: ${STUDIO_MEDIA} https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com https://stats.g.doubleclick.net https://www.facebook.com https://connect.facebook.net`,
+  `connect-src 'self' ${SUBMIT_ORIGIN} https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.clarity.ms https://c.bing.com https://stats.g.doubleclick.net https://*.g.doubleclick.net ${GOOGLE_AUDIENCES} https://www.facebook.com https://eu.i.posthog.com https://eu-assets.i.posthog.com`,
+  `img-src 'self' data: blob: ${STUDIO_MEDIA} https://www.googletagmanager.com https://*.google-analytics.com https://*.clarity.ms https://c.bing.com https://stats.g.doubleclick.net https://*.g.doubleclick.net ${GOOGLE_AUDIENCES} https://www.facebook.com https://connect.facebook.net`,
   `font-src 'self' data:`,
   `frame-src 'self' https://challenges.cloudflare.com https://www.googletagmanager.com`,
   `worker-src 'self' blob:`,
