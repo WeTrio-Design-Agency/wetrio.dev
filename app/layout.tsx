@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Analytics } from "@/components/Analytics";
 import { CookieBanner } from "@/components/CookieBanner";
 import { consentDefaultScript } from "@/lib/analytics/consent";
+import { posthogScript } from "@/lib/analytics/posthog";
 import { loadSeo } from "@/lib/content";
 import { OG_IMAGE, SITE_NAME, SITE_ORIGIN } from "@/lib/site";
 import { loadCookieCopy, loadTrackers } from "@/lib/studio";
@@ -46,6 +47,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <head>
         {/* Consent Mode defaults, inline and first, so no tag fires in a state nobody declared. */}
         {consentScript ? <script dangerouslySetInnerHTML={{ __html: consentScript }} /> : null}
+        <script dangerouslySetInnerHTML={{ __html: posthogScript() }} />
       </head>
       <body>
         {children}

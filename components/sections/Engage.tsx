@@ -18,7 +18,7 @@ export function Engage({ copy }: { copy: Content["engage"] }) {
           <p className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
             {copy.subtitle}
           </p>
-          <a href="#contact" className="btn btn-primary">
+          <a href="#contact" data-placement="engage" className="btn btn-primary">
             {copy.button}
           </a>
         </Reveal>

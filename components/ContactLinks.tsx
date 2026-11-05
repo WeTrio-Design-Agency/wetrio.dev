@@ -30,7 +30,7 @@ export function ContactLinks({ order = ["email", "telegram", "whatsapp"], place,
             key={c}
             href={l.href}
             {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            onClick={() => trackEvent("contact_click", { channel: c, place })}
+            onClick={() => trackEvent("contact_click", { channel: c, placement: place })}
             className={`btn ${i === 0 ? "btn-primary" : "btn-secondary"}`}
           >
             {l.label}

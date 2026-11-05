@@ -48,7 +48,7 @@ export function Footer({ copy, nav }: { copy: Content["footer"]; nav: Content["n
           </p>
           {/* the hero's two buttons (Kirill, 30.10) */}
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#contact" className="btn btn-primary">
+            <a href="#contact" data-placement="footer" className="btn btn-primary">
               {copy.primary}
             </a>
             <a href="#products" className="btn btn-secondary">

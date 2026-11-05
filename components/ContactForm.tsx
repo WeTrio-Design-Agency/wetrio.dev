@@ -70,13 +70,22 @@ export function ContactForm({ copy }: { copy: Content["contact"]["form"] }) {
     data.append("pageUrl", window.location.href);
     const attribution = attributionField();
     if (attribution) data.append("attribution", attribution);
+    // one id for the browser's Lead and the copy the intake sends Meta from the server, so Meta counts one
+    // randomUUID exists only on https and in browsers from 2022 on; a form stuck on "Sending…" would cost the lead
+    const eventId =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `lead-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    data.append("eventId", eventId);
+    const fbp = document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/)?.[1];
+    if (fbp) data.append("fbp", fbp);
     if (honeypot) data.append("website", honeypot);
     if (token) data.append("cf-turnstile-response", token);
 
     try {
       const res = await fetch(SUBMIT_URL, { method: "POST", headers: { Accept: "application/json" }, body: data });
       if (res.ok) {
-        trackEvent("enquiry_submitted", { service: service || "not_specified" });
+        trackEvent("quote_form_submitted", { service: service || "none", file_count: 0 }, eventId);
         setState("success");
         return;
       }
@@ -86,14 +95,14 @@ export function ContactForm({ copy }: { copy: Content["contact"]["form"] }) {
         const body = (await res.json().catch(() => null)) as { error?: string } | null;
         if (/verification/i.test(body?.error ?? "")) reason = "turnstile";
       }
-      trackEvent("enquiry_failed", { reason });
+      trackEvent("quote_form_failed", { reason });
       setSendError(
         res.status === 429
           ? `Too many requests from this network. Try again in a few minutes or write to ${CONTACT_EMAIL}.`
           : `Something went wrong. Please try again or write to ${CONTACT_EMAIL}.`,
       );
     } catch {
-      trackEvent("enquiry_failed", { reason: "network" });
+      trackEvent("quote_form_failed", { reason: "network" });
       setSendError(`Could not connect. Check your connection or write to ${CONTACT_EMAIL}.`);
     } finally {
       sending.current = false;

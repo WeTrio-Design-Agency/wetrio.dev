@@ -9,6 +9,8 @@
  * said where it came from.
  */
 
+import { posthogIds } from "./analytics/posthog";
+
 const PARAMS = [
   "utm_source",
   "utm_medium",
@@ -105,9 +107,18 @@ export function captureAttribution(): void {
   }
 }
 
-/** The value the form posts alongside the lead, or null when this browser has nothing to say. */
+/**
+ * The value the form posts alongside the lead, or null when this browser has nothing to say. It carries the visit's
+ * PostHog ids, read now (the first touch may be ninety days old): the Hub opens the lead's visit by them.
+ */
 export function attributionField(): string | null {
   if (typeof window === "undefined") return null;
-  const attribution = read();
-  return attribution ? JSON.stringify(attribution) : null;
+  const ids = posthogIds();
+  let attribution = read();
+  if (!attribution) {
+    if (!ids.posthog_session_id && !ids.posthog_distinct_id) return null;
+    const empty: Touch = { landed_at: new Date().toISOString() };
+    attribution = { first_touch: empty, last_touch: empty };
+  }
+  return JSON.stringify({ ...attribution, ...ids });
 }

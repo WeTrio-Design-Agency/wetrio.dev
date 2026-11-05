@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
-import { trackEvent } from "@/lib/analytics/track";
 import type { Content } from "@/lib/content";
 import { NAV_HREFS } from "@/lib/site";
 
@@ -55,7 +54,7 @@ export function Header({ copy }: { copy: Content["nav"] }) {
           ))}
         </div>
 
-        <a href="#contact" onClick={() => trackEvent("cta_click", { place: "nav" })} className="btn btn-primary ml-auto mr-3 lg:mr-0">
+        <a href="#contact" data-placement="header" className="btn btn-primary ml-auto mr-3 lg:mr-0">
           {copy.button}
         </a>
 

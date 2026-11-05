@@ -84,7 +84,7 @@ export function revokeGoogleConsent() {
 }
 
 /** The identifiers an accepted tracker leaves behind; `_ga_<STREAM>` is matched by prefix. */
-const TRACKING_COOKIES = ["_ga", "_gid", "_gcl_au", "_fbp", "_fbc", "_clck", "_clsk"];
+const TRACKING_COOKIES = ["_ga", "_gid", "_gcl_au", "_fbp", "_fbc", "_clck", "_clsk", "ph"];
 
 export function clearTrackingCookies() {
   if (typeof document === "undefined") return;

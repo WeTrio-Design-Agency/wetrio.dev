@@ -43,7 +43,7 @@ export function Hero({ copy }: { copy: Content["hero"] }) {
             {copy.subtitle}
           </Reveal>
           <Reveal delay={0.3} className="mt-10 flex flex-wrap items-center gap-3">
-            <a href="#contact" className="btn btn-primary">
+            <a href="#contact" data-placement="hero" className="btn btn-primary">
               {copy.primary}
             </a>
             <a href="#products" className="btn btn-secondary">

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { captureAttribution } from "@/lib/attribution";
 import { readConsent } from "@/lib/analytics/consent";
+import { trackEvent } from "@/lib/analytics/track";
 import { analyticsHostAllowed } from "@/lib/site";
 
 declare global {
@@ -45,7 +46,7 @@ function injectPixel(id: string) {
 /**
  * The studio's trackers, as on wetr.io: the GTM container (GA4 and Clarity live inside it) loads for everyone and
  * stores nothing until Consent Mode is granted; the Meta Pixel has no consent model, so it loads only on "Accept all".
- * Both ids come from the admin's Site settings (lib/studio.ts).
+ * Both ids come from the admin's Site settings (lib/studio.ts). PostHog is the inline script in the layout.
  */
 export function Analytics({ gtmId, metaPixelId }: { gtmId: string; metaPixelId: string }) {
   useEffect(() => {
@@ -61,6 +62,16 @@ export function Analytics({ gtmId, metaPixelId }: { gtmId: string; metaPixelId: 
     script.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`;
     document.head.appendChild(script);
   }, [gtmId]);
+
+  // Every button that leads to the form says where it sits (data-placement); one listener counts them all.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as Element | null)?.closest?.('a[href="#contact"][data-placement]');
+      if (a) trackEvent("quote_form_opened", { placement: a.getAttribute("data-placement") ?? "" });
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
 
   useEffect(() => {
     if (!metaPixelId) return;
