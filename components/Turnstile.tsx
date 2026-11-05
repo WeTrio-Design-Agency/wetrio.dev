@@ -71,7 +71,8 @@ export function Turnstile({ onVerify, onExpire, onLoadError, resetKey }: Props) 
       widgetId = window.turnstile.render(ref.current, {
         sitekey: TURNSTILE_SITE_KEY,
         theme: "dark",
-        size: "flexible",
+        // Flexible starts at 300px; the form's column on a phone is narrower and the widget was cut at its right edge.
+        size: ref.current.clientWidth < 300 ? "compact" : "flexible",
         appearance: "interaction-only",
         callback: (token) => {
           if (destroyed) return;

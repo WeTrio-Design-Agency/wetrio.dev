@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { attributionField } from "@/lib/attribution";
 import type { Content } from "@/lib/content";
 import { trackEvent } from "@/lib/analytics/track";
@@ -36,6 +36,22 @@ export function ContactForm({ copy }: { copy: Content["contact"]["form"] }) {
   const [tokenFailed, setTokenFailed] = useState(false);
   const [resetKey, setResetKey] = useState(0);
   const sending = useRef(false);
+  // The human check loads when the form comes near the screen, not with the page: it was 1.7 MB of the page's 3 MB
+  // and most of the main-thread work on a phone, for a form at the very bottom (audit 05.11).
+  const checkSlot = useRef<HTMLDivElement>(null);
+  const [checkNear, setCheckNear] = useState(false);
+  useEffect(() => {
+    const el = checkSlot.current;
+    if (!el || typeof IntersectionObserver === "undefined") return setCheckNear(true);
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        setCheckNear(true);
+        io.disconnect();
+      }
+    }, { rootMargin: "800px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   const freshToken = () => {
     setToken(null);
@@ -186,7 +202,11 @@ export function ContactForm({ copy }: { copy: Content["contact"]["form"] }) {
       </div>
 
       {!tokenFailed && (
-        <Turnstile resetKey={resetKey} onVerify={setToken} onExpire={() => setToken(null)} onLoadError={() => setTokenFailed(true)} />
+        <div ref={checkSlot}>
+          {checkNear && (
+            <Turnstile resetKey={resetKey} onVerify={setToken} onExpire={() => setToken(null)} onLoadError={() => setTokenFailed(true)} />
+          )}
+        </div>
       )}
 
       {sendError && (

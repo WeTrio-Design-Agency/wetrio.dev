@@ -64,7 +64,7 @@ export function Testimonials({ copy, items }: { copy: Content["testimonials"]; i
                 aria-hidden={i !== active}
                 className={`[grid-area:1/1] flex flex-col transition-opacity duration-500 ${i === active ? "opacity-100" : "invisible opacity-0"}`}
               >
-                <div className="flex gap-1 text-accent" aria-label={`${t.rating} out of 5`}>
+                <div className="flex gap-1 text-accent" role="img" aria-label={`${t.rating} out of 5`}>
                   {Array.from({ length: 5 }, (_, s) => (
                     <svg key={s} viewBox="0 0 20 20" className={`h-4 w-4 ${s < t.rating ? "fill-current" : "fill-white/15"}`} aria-hidden="true">
                       <path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
