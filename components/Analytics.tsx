@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { captureAttribution } from "@/lib/attribution";
 import { readConsent } from "@/lib/analytics/consent";
-import { trackEvent } from "@/lib/analytics/track";
+import { linkEvent, trackEvent } from "@/lib/analytics/track";
 import { analyticsHostAllowed } from "@/lib/site";
 
 declare global {
@@ -63,11 +63,18 @@ export function Analytics({ gtmId, metaPixelId }: { gtmId: string; metaPixelId: 
     document.head.appendChild(script);
   }, [gtmId]);
 
-  // Every button that leads to the form says where it sits (data-placement); one listener counts them all.
+  // One listener counts every link that means something (lib/analytics/track.ts linkEvent): the form's buttons, the
+  // contact and social links, the project cards. Where it sits: the nearest data-placement, else the footer, the
+  // menu or the section.
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      const a = (e.target as Element | null)?.closest?.('a[href="#contact"][data-placement]');
-      if (a) trackEvent("quote_form_opened", { placement: a.getAttribute("data-placement") ?? "" });
+      const a = (e.target as Element | null)?.closest?.("a[href]");
+      if (!a) return;
+      const placement =
+        a.closest("[data-placement]")?.getAttribute("data-placement") ||
+        (a.closest("footer") ? "footer" : a.closest("nav") ? "header" : a.closest("section[id]")?.id || "page");
+      const hit = linkEvent(a.getAttribute("href") ?? "", placement);
+      if (hit) trackEvent(...hit);
     };
     document.addEventListener("click", onClick);
     return () => document.removeEventListener("click", onClick);

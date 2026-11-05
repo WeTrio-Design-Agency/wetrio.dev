@@ -17,8 +17,33 @@ const META_STANDARD_EVENTS: Record<string, string> = {
 };
 
 /** Every parameter an event here can carry: cleared on each push, or the dataLayer lends one event's to the next. */
-const EVENT_PARAMS = ["channel", "placement", "service", "file_count", "reason"] as const;
+const EVENT_PARAMS = ["channel", "placement", "service", "file_count", "reason", "item"] as const;
 const CLEARED = Object.fromEntries(EVENT_PARAMS.map((k) => [k, undefined]));
+
+/** Where a click on this address goes in wetr.io's contract: a way to write to us or follow us, a case, or nothing. */
+const CHANNELS: [RegExp, string][] = [
+  [/^mailto:/i, "email"],
+  [/^https?:\/\/(t\.me|telegram\.me)\//i, "telegram"],
+  [/^https?:\/\/(wa\.me|api\.whatsapp\.com|(www\.)?whatsapp\.com)\//i, "whatsapp"],
+  [/^https?:\/\/(www\.)?behance\.net\//i, "behance"],
+  [/^https?:\/\/(www\.)?instagram\.com\//i, "instagram"],
+  [/^https?:\/\/(www\.)?linkedin\.com\//i, "linkedin"],
+];
+const CASE = /^https?:\/\/([a-z0-9-]+)\.demo\.wetrio\.dev|^https?:\/\/wetr\.io\/projects\/([a-z0-9-]+)/i;
+
+/**
+ * The event a link click is, by its address alone: the form's buttons, every contact and social link, every
+ * project card. Other links (the studio's pages, a cited article) are left to PostHog's autocapture and GA4's
+ * outbound clicks.
+ */
+export function linkEvent(href: string, placement: string): [string, Record<string, string>] | null {
+  if (href === "#contact") return ["quote_form_opened", { placement }];
+  const channel = CHANNELS.find(([re]) => re.test(href))?.[1];
+  if (channel) return ["contact_click", { channel, placement }];
+  const c = CASE.exec(href);
+  if (c) return ["case_opened", { item: c[1] ?? c[2], placement }];
+  return null;
+}
 
 export function trackEvent(event: string, params: Record<string, string | number> = {}, eventId?: string) {
   if (typeof window === "undefined" || !analyticsHostAllowed()) return;
